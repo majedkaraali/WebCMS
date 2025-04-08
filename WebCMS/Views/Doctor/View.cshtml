@@ -1,0 +1,70 @@
+﻿@model WebCMS.Models.Appointment
+@{
+    ViewBag.Title = "Appointment Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0"><i class="bi bi-calendar-check"></i> Appointment Details</h3>
+        </div>
+        <div class="card-body p-4">
+            <h5 class="text-secondary"><i class="bi bi-hash"></i> Appointment ID: @Model.Id</h5>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <p><i class="bi bi-calendar-event"></i> <strong>Appointment Date:</strong> @Model.AppointmentDate.ToString("g")</p>
+                    <p><i class="bi bi-person"></i> <strong>Patient:</strong> @Model.Patient.FullName</p>
+                    <p><i class="bi bi-person-badge"></i> <strong>Doctor:</strong> @Model.Doctor.FullName</p>
+                    <p>
+                        <i class="bi bi-clipboard-check"></i> <strong>Status:</strong>
+                        <span class="badge @(Model.Status == "Completed" ? "bg-success" : Model.Status == "Pending" ? "bg-warning text-dark" : "bg-danger")">
+                            @Model.Status
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p><i class="bi bi-briefcase-medical"></i> <strong>Reason for Visit:</strong> @Model.ReasonForVisit</p>
+                    <p><i class="bi bi-exclamation-circle"></i> <strong>Symptoms:</strong> @Model.Symptoms</p>
+                    <p><i class="bi bi-clock"></i> <strong>Duration:</strong> @(Model.Duration.HasValue ? Model.Duration.Value + " minutes" : "Not specified")</p>
+                    <p><i class="bi bi-sticky"></i> <strong>Notes:</strong> @Model.Notes</p>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p><i class="bi bi-calendar-plus"></i> <strong>Created On:</strong> @Model.CreatedDate.ToString("g")</p>
+                    <p><i class="bi bi-pencil-square"></i> <strong>Last Updated On:</strong> @(Model.UpdatedDate.HasValue ? Model.UpdatedDate.Value.ToString("g") : "Not updated")</p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <i class="bi bi-x-circle"></i> <strong>Cancelled:</strong>
+                        <span class="badge @(Model.IsCancelled.GetValueOrDefault() ? "bg-danger" : "bg-success")">
+                            @(Model.IsCancelled.GetValueOrDefault() ? "Yes" : "No")
+                        </span>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer text-center">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Appointments
+            </a>
+
+            <a asp-controller="Doctor" asp-action="Prescriptions" asp-route-id="@Model.Id" class="btn btn-info">Prescriptions</a>
+            <a asp-controller="Doctor" asp-action="Complete" asp-route-id="@Model.Id" class="btn btn-success">Mark Completed</a>
+
+            <a asp-action="LabResults" class="btn btn-warning">Lab results</a>
+            <a asp-action="RadiologyReports" class="btn btn-dark">Radiology reports</a>
+            <a asp-action="EMR" class="btn btn-info">EMR</a>
+            <a asp-action="Notes" class="btn btn-secondary">Notes</a>
+        </div>
+
+    </div>
+</div>
+
+ 

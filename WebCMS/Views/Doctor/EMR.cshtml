@@ -1,0 +1,504 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Medical Record System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .section-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 5px solid #0d6efd;
+        }
+
+        .table-responsive {
+            margin-bottom: 30px;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <h1 class="text-center mb-4"><i class="bi bi-hospital"></i> Electronic Health Record System</h1>
+
+        <!-- Patient Demographics -->
+        <div class="section-header">
+            <h2><i class="bi bi-person-vcard section-icon"></i>Patient Demographics</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <th style="width: 25%">Full name</th>
+                        <td>John Michael Doe</td>
+                    </tr>
+                    <tr>
+                        <th>Date of birth</th>
+                        <td>1985-06-15</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <th>Contact information</th>
+                        <td>555-123-4567 | johndoe@email.com | 123 Main St, Anytown</td>
+                    </tr>
+                    <tr>
+                        <th>National ID</th>
+                        <td>XXX-XX-1234</td>
+                    </tr>
+                    <tr>
+                        <th>Insurance information</th>
+                        <td>Blue Cross Blue Shield | ID: BCBS123456789 | Group: 987654</td>
+                    </tr>
+                    <tr>
+                        <th>Emergency contact</th>
+                        <td>Jane Doe (Spouse) - 555-987-6543</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Appointments and Scheduling -->
+        <div class="section-header">
+            <h2><i class="bi bi-calendar-check section-icon"></i>Appointments and Scheduling</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Date/Time</th>
+                        <th>Reason</th>
+                        <th>Physician</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-10-15 09:30 AM</td>
+                        <td>Annual physical</td>
+                        <td>Dr. Sarah Johnson</td>
+                        <td>45 min</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>2023-11-20 02:15 PM</td>
+                        <td>Follow-up - Blood pressure</td>
+                        <td>Dr. Michael Chen</td>
+                        <td>30 min</td>
+                        <td><span class="badge bg-primary">Scheduled</span></td>
+                    </tr>
+                    <tr>
+                        <td>2023-09-10 10:00 AM</td>
+                        <td>Flu shot</td>
+                        <td>Nurse Practitioner Amy Wilson</td>
+                        <td>15 min</td>
+                        <td><span class="badge bg-secondary">Canceled</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Medical History -->
+        <div class="section-header">
+            <h2><i class="bi bi-file-medical section-icon"></i>Medical History</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Past Illnesses
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Hypertension (diagnosed 2018)</li>
+                            <li class="list-group-item">Type 2 Diabetes (diagnosed 2020)</li>
+                            <li class="list-group-item">Childhood asthma (resolved age 12)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Surgeries and Hospitalizations
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Appendectomy (2002)</li>
+                            <li class="list-group-item">Hospitalized for pneumonia (2015, 3 days)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Allergies
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-warning">Penicillin (rash, difficulty breathing)</li>
+                            <li class="list-group-item list-group-item-warning">Shellfish (hives)</li>
+                            <li class="list-group-item">No known food allergies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Social History
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Occupation: Accountant</li>
+                            <li class="list-group-item">Smoking: Never</li>
+                            <li class="list-group-item">Alcohol: Occasional (1-2 drinks/week)</li>
+                            <li class="list-group-item">Exercise: 2-3 times per week</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clinical Notes / Progress Notes -->
+        <div class="section-header">
+            <h2><i class="bi bi-clipboard2-pulse section-icon"></i>Clinical Notes / Progress Notes</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Date</th>
+                        <th>Physician</th>
+                        <th>Observations</th>
+                        <th>Diagnosis</th>
+                        <th>Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-10-15</td>
+                        <td>Dr. Sarah Johnson</td>
+                        <td>Patient reports increased fatigue. BP 142/88, weight 198 lbs (+5 lbs since last visit)</td>
+                        <td>Uncontrolled hypertension, Obesity</td>
+                        <td>Increase lisinopril to 20mg daily, recommend low-sodium diet, follow up in 1 month</td>
+                    </tr>
+                    <tr>
+                        <td>2023-07-20</td>
+                        <td>Dr. Michael Chen</td>
+                        <td>Patient doing well on current regimen. BP 128/82, A1C 6.8%</td>
+                        <td>Controlled hypertension, Diabetes Mellitus Type 2</td>
+                        <td>Continue current medications, monitor blood sugar 2x daily</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Medications -->
+        <div class="section-header">
+            <h2><i class="bi bi-capsule-pill section-icon"></i>Medications</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Medication</th>
+                        <th>Dosage</th>
+                        <th>Frequency</th>
+                        <th>Start Date</th>
+                        <th>Prescribing Physician</th>
+                        <th>Last Refill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lisinopril</td>
+                        <td>10 mg</td>
+                        <td>Once daily</td>
+                        <td>2020-03-15</td>
+                        <td>Dr. Sarah Johnson</td>
+                        <td>2023-10-18 (90 day supply)</td>
+                    </tr>
+                    <tr>
+                        <td>Metformin</td>
+                        <td>1000 mg</td>
+                        <td>Twice daily</td>
+                        <td>2020-05-22</td>
+                        <td>Dr. Michael Chen</td>
+                        <td>2023-10-10 (90 day supply)</td>
+                    </tr>
+                    <tr>
+                        <td>Atorvastatin</td>
+                        <td>20 mg</td>
+                        <td>Once daily at bedtime</td>
+                        <td>2021-11-05</td>
+                        <td>Dr. Sarah Johnson</td>
+                        <td>2023-10-18 (90 day supply)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Laboratory and Test Results -->
+        <div class="section-header">
+            <h2><i class="bi bi-droplet section-icon"></i>Laboratory and Test Results</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Test</th>
+                        <th>Result</th>
+                        <th>Reference Range</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hemoglobin A1C</td>
+                        <td>6.8%</td>
+                        <td>4.0-5.6%</td>
+                        <td>2023-10-15</td>
+                        <td><span class="badge bg-danger">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Fasting Glucose</td>
+                        <td>128 mg/dL</td>
+                        <td>70-99 mg/dL</td>
+                        <td>2023-10-15</td>
+                        <td><span class="badge bg-danger">High</span></td>
+                    </tr>
+                    <tr>
+                        <td>Total Cholesterol</td>
+                        <td>188 mg/dL</td>
+                        <td><200 mg /dL</td>
+                        <td>2023-10-15</td>
+                        <td><span class="badge bg-success">Normal</span></td>
+                    </tr>
+                    <tr>
+                        <td>LDL Cholesterol</td>
+                        <td>102 mg/dL</td>
+                        <td><100 mg /dL</td>
+                        <td>2023-10-15</td>
+                        <td><span class="badge bg-warning text-dark">Borderline</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Imaging Reports -->
+        <div class="section-header">
+            <h2><i class="bi bi-file-earmark-image section-icon"></i>Imaging Reports</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Study</th>
+                        <th>Date</th>
+                        <th>Radiologist</th>
+                        <th>Findings</th>
+                        <th>Images</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chest X-Ray (2 views)</td>
+                        <td>2023-03-10</td>
+                        <td>Dr. Robert Williams</td>
+                        <td>No acute cardiopulmonary findings. Mild hyperinflation.</td>
+                        <td><a href="#" class="btn btn-sm btn-outline-primary">View Images</a></td>
+                    </tr>
+                    <tr>
+                        <td>Abdominal Ultrasound</td>
+                        <td>2022-08-15</td>
+                        <td>Dr. Lisa Thompson</td>
+                        <td>Normal liver, gallbladder, pancreas, and kidneys. No evidence of cholelithiasis.</td>
+                        <td><a href="#" class="btn btn-sm btn-outline-primary">View Images</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Immunization Records -->
+        <div class="section-header">
+            <h2><i class="bi bi-syringe section-icon"></i>Immunization Records</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Vaccine</th>
+                        <th>Date Administered</th>
+                        <th>Next Due Date</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Influenza (2023-2024 season)</td>
+                        <td>2023-09-25</td>
+                        <td>2024-09-25</td>
+                        <td>Primary Care Clinic</td>
+                    </tr>
+                    <tr>
+                        <td>COVID-19 (Pfizer - Booster)</td>
+                        <td>2022-11-15</td>
+                        <td>Pending new guidelines</td>
+                        <td>Community Health Center</td>
+                    </tr>
+                    <tr>
+                        <td>Tetanus/Diphtheria/Pertussis</td>
+                        <td>2020-06-10</td>
+                        <td>2025-06-10</td>
+                        <td>Primary Care Clinic</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Billing and Payments -->
+        <div class="section-header">
+            <h2><i class="bi bi-cash-coin section-icon"></i>Billing and Payments</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Charge</th>
+                        <th>Insurance Paid</th>
+                        <th>Patient Paid</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-10-15</td>
+                        <td>Office Visit - Established Patient</td>
+                        <td>$150.00</td>
+                        <td>$120.00</td>
+                        <td>$30.00</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-15</td>
+                        <td>Lab - Hemoglobin A1C</td>
+                        <td>$85.00</td>
+                        <td>$85.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>2023-07-20</td>
+                        <td>Office Visit - Established Patient</td>
+                        <td>$150.00</td>
+                        <td>$120.00</td>
+                        <td>$30.00</td>
+                        <td>$0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Access Logs and Security -->
+        <div class="section-header">
+            <h2><i class="bi bi-shield-lock section-icon"></i>Access Logs and Security</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>User</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-10-15 09:45:23</td>
+                        <td>sjohnson@clinic.com</td>
+                        <td>Physician</td>
+                        <td>Viewed patient record, Added progress note</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-15 10:20:12</td>
+                        <td>rnwilson@clinic.com</td>
+                        <td>Nurse</td>
+                        <td>Viewed patient record, Updated vitals</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-16 08:15:47</td>
+                        <td>mbilling@clinic.com</td>
+                        <td>Billing</td>
+                        <td>Viewed billing information</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Consent Forms and Legal Documents -->
+        <div class="section-header">
+            <h2><i class="bi bi-file-earmark-text section-icon"></i>Consent Forms and Legal Documents</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Document</th>
+                        <th>Date Signed</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Consent for Treatment</td>
+                        <td>2020-01-15</td>
+                        <td><span class="badge bg-success">Active</span></td>
+                        <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>HIPAA Privacy Agreement</td>
+                        <td>2020-01-15</td>
+                        <td><span class="badge bg-success">Active</span></td>
+                        <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Advanced Directive</td>
+                        <td>Not on file</td>
+                        <td><span class="badge bg-secondary">Missing</span></td>
+                        <td><a href="#" class="btn btn-sm btn-outline-primary">Request</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

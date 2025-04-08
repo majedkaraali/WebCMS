@@ -1,0 +1,46 @@
+﻿@model WebCMS.Models.Prescription
+
+
+<h2>Create Prescription</h2>
+
+
+
+<form asp-action="CreatePrescription">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="AppointmentId" value="@ViewBag.appoitment.Id" />
+
+    <div class="form-group">
+        <label asp-for="MedicationName"></label>
+        <input asp-for="MedicationName" class="form-control" />
+        <span asp-validation-for="MedicationName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Dosage"></label>
+        <input asp-for="Dosage" class="form-control" />
+        <span asp-validation-for="Dosage" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Frequency"></label>
+        <input asp-for="Frequency" class="form-control" />
+        <span asp-validation-for="Frequency" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duration"></label>
+        <input asp-for="Duration" class="form-control" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="CreatedDate" value="@DateTime.Now" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

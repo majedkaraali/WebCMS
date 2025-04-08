@@ -1,0 +1,87 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model WebCMS.Models.Patient
+
+@{
+    <form asp-action="Update" method="post" class="p-4 rounded shadow-lg bg-white">
+        <h3 class="mb-4 text-primary">Edit Profile</h3>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="FullName" class="form-label">Full Name</label>
+                <input asp-for="FullName" class="form-control" placeholder="Enter full name" required />
+            </div>
+
+            <div class="col-md-6">
+                <label for="Email" class="form-label">Email</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Enter email" required />
+            </div>
+
+            <div class="col-md-12">
+                <label for="Address" class="form-label">Address</label>
+                <input asp-for="Address" class="form-control" placeholder="Enter address" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Enter phone number" required />
+            </div>
+
+            <div class="col-md-6">
+                <label for="DateOfBirth" class="form-label">Date of Birth</label>
+                <input asp-for="DateOfBirth" type="date" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label for="Gender" class="form-label">Gender</label>
+                <select asp-for="Gender" class="form-select">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="EmergencyContactName" class="form-label">Emergency Contact Name</label>
+                <input asp-for="EmergencyContactName" class="form-control" placeholder="Enter contact name" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="EmergencyContactPhone" class="form-label">Emergency Contact Phone</label>
+                <input asp-for="EmergencyContactPhone" type="tel" class="form-control" placeholder="Enter emergency contact" required />
+            </div>
+
+            <div class="col-md-6">
+                <label for="InsuranceProvider" class="form-label">Insurance Provider</label>
+                <input asp-for="InsuranceProvider" class="form-control" placeholder="Enter insurance provider" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="PolicyNumber" class="form-label">Policy Number</label>
+                <input asp-for="PolicyNumber" class="form-control" placeholder="Enter policy number" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="Occupation" class="form-label">Occupation</label>
+                <input asp-for="Occupation" class="form-control" placeholder="Enter occupation" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="Allergies" class="form-label">Allergies</label>
+                <input asp-for="Allergies" class="form-control" placeholder="Enter allergies" />
+            </div>
+
+            <div class="col-md-12">
+                <label for="SocialHistory" class="form-label">Social History</label>
+                <textarea asp-for="SocialHistory" class="form-control" rows="3" placeholder="Enter social history"></textarea>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-primary px-4">Update Profile</button>
+        </div>
+    </form>
+}
+

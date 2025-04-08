@@ -1,0 +1,51 @@
+﻿@model List<WebCMS.Models.Prescription>
+
+@{
+    ViewData["Title"] = "Prescriptions";
+}
+
+<h2>Prescriptions for Appointment</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Medication Name</th>
+                <th>Dosage</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Notes</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MedicationName</td>
+                    <td>@item.Dosage</td>
+                    <td>@item.Frequency</td>
+                    <td>@item.Duration</td>
+                    <td>@item.Notes</td>
+                    <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No prescriptions found for this appointment.</p>
+    
+}
+
+
+<a asp-route-id="@ViewBag.appoitment.Id" asp-action="CreatePrescription" class="btn btn-success">Create</a>
+
+
+
+
+        
+
+

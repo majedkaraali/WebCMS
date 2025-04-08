@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Doctor Dashboard";
+}
+@model List<WebCMS.Models.Appointment>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Welcome Message -->
+        <div class="col-12 text-center mb-4">
+            <h2 class="fw-bold">👨‍⚕️ Welcome, Doctor!</h2>
+            <p class="text-muted">Manage your appointments and profile here.</p>
+        </div>
+
+        <!-- Appointments Section -->
+        <div class="col-lg-8  table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-calendar-check"></i> Appointments</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Appointment Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var appointment in Model)
+                                    {
+                                        <tr>
+                                            <td>@appointment.Patient.FullName</td>
+                                            <td>@appointment.AppointmentDate.ToString("yyyy-MM-dd HH:mm")</td>
+                                            <td>
+                                                <span class="badge @(appointment.Status == "Completed" ? "bg-success" : appointment.Status == "Pending" ? "bg-warning text-dark" :
+                                                                    appointment.Status=="Scheduled" ?  "bg-warning text-dark"   : "bg-danger")">
+                                                    @appointment.Status
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a asp-action="View" asp-route-id="@appointment.Id" class="btn btn-sm btn-info">
+                                                    <i class="bi bi-eye"></i> View
+                                                </a>
+                                                <a asp-action="Cancel" asp-route-id="@appointment.Id" class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-x-circle"></i> Cancel
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">No Appointments Found</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile & Logout Section -->
+        <div class="col-lg-4">
+            <div class="card shadow-lg border-0 rounded-4 mb-3">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0"><i class="bi bi-person-circle"></i> Manage Profile</h4>
+                </div>
+                <div class="card-body text-center">
+                    <a asp-action="Profile" class="btn btn-primary w-100">
+                        <i class="bi bi-pencil-square"></i> Edit Profile
+                    </a>
+                </div>
+            </div>
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="bi bi-box-arrow-right"></i> Logout</h4>
+                </div>
+                <div class="card-body text-center">
+                    <a asp-action="Logout" class="btn btn-danger w-100">
+                        <i class="bi bi-power"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
