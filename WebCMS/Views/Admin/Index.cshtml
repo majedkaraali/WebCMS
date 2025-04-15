@@ -1,0 +1,21 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>Welcome to the WebCMS Admin Panel</h2>
+    <p>Use the navigation menu to manage users, roles, and appointments.</p>
+</div>
+
+<div class="text-center">
+    <h2>Admin Dashboard</h2>
+    <p>Manage your application from here.</p>
+</div>
+
+<div class="container">
+    <a asp-action="Users" class="btn btn-primary">Users</a>
+    <a asp-action="Roles" class="btn btn-success">Roles</a>
+</div>

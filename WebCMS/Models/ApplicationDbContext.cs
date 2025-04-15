@@ -13,6 +13,11 @@
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<LabOrder> LabOrders { get; set; }
+        public DbSet<LabTest> LabTests { get; set; }
+        public DbSet<LabTestResult> LabTestResults { get; set; }
+        public DbSet<LabWorker> LabWorkers { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

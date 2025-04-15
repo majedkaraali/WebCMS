@@ -38,7 +38,10 @@ namespace WebCMS.Controllers
              .OrderByDescending(a => a.CreatedDate)
              .ToList();
 
+          
+
             ViewBag.Doctor = doctor;
+          //  ViewBag.Patient = patient;
             return View(appointments);
         }
 
@@ -60,7 +63,7 @@ namespace WebCMS.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Profile()
+        public IActionResult UpdateProf()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == userId);
@@ -71,6 +74,26 @@ namespace WebCMS.Controllers
             }
 
             return View(doctor);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProf(Doctor upDoctor)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == userId);
+
+            if (doctor == null)
+            {
+                return NotFound("Doctor not found.");
+            }
+
+            doctor.FullName = upDoctor.FullName;
+            doctor.Specialization = upDoctor.Specialization;
+           
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
 

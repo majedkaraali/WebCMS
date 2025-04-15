@@ -1,0 +1,32 @@
+﻿@model List<WebCMS.Models.UserWithRoleViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>Users</h2>
+
+@if (Model!=null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserId</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+            </tr>
+        }
+        
+    </table>
+}
+
+
+<a asp-action="RegisterUser" class="btn btn-success"> Register New User</a>

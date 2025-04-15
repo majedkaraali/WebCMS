@@ -1,0 +1,39 @@
+﻿@model List<WebCMS.Models.RolesViewModel>
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h2>Roles</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.RoleId</td>
+                <td>@role.RoleName</td>
+                <td>
+                    @Html.ActionLink("Edit", "EditRole", new { id = role.RoleId }) |
+                    @Html.ActionLink("Delete", "DeleteRole", new { id = role.RoleId })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No roles found.</p>
+}
+
+<div class="align-content-center">
+    <a asp-action="CreateRole" class="btn btn-success">Create</a>
+</div>

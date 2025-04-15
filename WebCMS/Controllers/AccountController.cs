@@ -41,11 +41,15 @@ namespace WebCMS.Controllers
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByEmailAsync(email);
+                Console.WriteLine(user);
+                Console.WriteLine(user.Role);
+                Console.WriteLine("---------------------------------------------");
                 return user.Role switch
                 {
                     "Patient" => RedirectToAction("Index", "Patient"),
                     "Doctor" => RedirectToAction("Index", "Doctor"),
                     "Admin" => RedirectToAction("Index", "Admin"),
+                    "Lab man" => RedirectToAction("Index", "Lab man"),
                     _ => RedirectToAction("Login"),
                 };
             }
@@ -66,7 +70,6 @@ namespace WebCMS.Controllers
 
             if (result.Succeeded)
             {
-                // Assign role in Identity system
                 await _userManager.AddToRoleAsync(user, role);
                 
                 if (role == "Doctor")
@@ -90,14 +93,14 @@ namespace WebCMS.Controllers
                     _context.Patients.Add(patient);
                 }
 
+                
+
                 await _context.SaveChangesAsync(); 
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Login");
             }
 
-
-            // If registration fails, return errors
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
@@ -109,8 +112,8 @@ namespace WebCMS.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync(); // Logs out the user
-            return RedirectToAction("Login", "Account"); // Redirect to login page
+            await _signInManager.SignOutAsync(); 
+            return RedirectToAction("Login", "Account");
         }
 
     }

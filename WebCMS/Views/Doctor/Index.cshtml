@@ -9,7 +9,31 @@
         <!-- Welcome Message -->
         <div class="col-12 text-center mb-4">
             <h2 class="fw-bold">👨‍⚕️ Welcome, Doctor!</h2>
-            <p class="text-muted">Manage your appointments and profile here.</p>
+            <div class="col-12 text-center mb-4">
+                
+
+                <h4 class="text-primary">Local time <span id="localTime"></span></h4>
+            </div>
+
+            @section Scripts {
+                <script>
+                    function updateTime() {
+                        var now = new Date();
+                        var formattedTime = now.getFullYear() + '-' +
+                            ('0' + (now.getMonth() + 1)).slice(-2) + '-' +
+                            ('0' + now.getDate()).slice(-2) + ' ' +
+                            ('0' + now.getHours()).slice(-2) + ':' +
+                            ('0' + now.getMinutes()).slice(-2) + ':' +
+                            ('0' + now.getSeconds()).slice(-2);
+                        document.getElementById('localTime').innerText = formattedTime;
+                    }
+
+                    setInterval(updateTime, 1000);
+                    updateTime();
+                </script>
+            }
+
+          
         </div>
 
         <!-- Appointments Section -->
@@ -69,27 +93,41 @@
 
         <!-- Profile & Logout Section -->
         <div class="col-lg-4">
-            <div class="card shadow-lg border-0 rounded-4 mb-3">
+            <div class="card shadow-lg border-0 rounded-4 mb-2">
                 <div class="card-header bg-secondary text-white">
-                    <h4 class="mb-0"><i class="bi bi-person-circle"></i> Manage Profile</h4>
+                    <h4 class="mb-0"><i class="bi bi-person-circle"></i> Fast Access</h4>
                 </div>
+
                 <div class="card-body text-center">
-                    <a asp-action="Profile" class="btn btn-primary w-100">
+                    <a asp-action="EMRS" class="btn btn-success w-100">
+                        <i class="bi bi-pencil-square"></i> EMR System
+                    </a>
+                </div>
+
+                <div class="card-body text-center">
+                    <a asp-action="UpdateProf" class="btn btn-primary w-100">
                         <i class="bi bi-pencil-square"></i> Edit Profile
                     </a>
                 </div>
-            </div>
 
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-header bg-dark text-white">
-                    <h4 class="mb-0"><i class="bi bi-box-arrow-right"></i> Logout</h4>
-                </div>
                 <div class="card-body text-center">
                     <a asp-action="Logout" class="btn btn-danger w-100">
                         <i class="bi bi-power"></i> Logout
                     </a>
                 </div>
+
+                <div class="card-body text-center">
+                    <a asp-controller="Lab" asp-action="Index" class="btn btn-warning w-100">
+                        <i class="bi bi-power"></i> Lab Results
+                    </a>
+                </div>
+              
+
+
             </div>
+
+
+
         </div>
     </div>
 </div>
