@@ -58,7 +58,7 @@ namespace WebCMS.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(string fullName, string email, string password, string role)
+        public async Task<IActionResult> RegisterUser(string fullName, string email, string password, string role)
         {
             var user = new ApplicationUser { FullName = fullName, Email = email, UserName = email, Role = role };
             var result = await _userManager.CreateAsync(user, password);
@@ -98,11 +98,24 @@ namespace WebCMS.Controllers
                     _context.LabWorkers.Add(labWorker);
                 }
 
+                else
+                {
+                    Console.WriteLine("NO");
+
+                    //var admin = new Admin
+                    //{
+                    //    FullName = fullName,
+                    //    Email = email,
+                    //    UserId = user.Id
+                    //};
+                    //_context.Admins.Add(admin);
+                }
+
+
 
                 await _context.SaveChangesAsync();
 
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Login");
+               
             }
 
             foreach (var error in result.Errors)
@@ -110,7 +123,7 @@ namespace WebCMS.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
-            return View();
+            return RedirectToAction("Users");
         }
 
         public IActionResult Roles()

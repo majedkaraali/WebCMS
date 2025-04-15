@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Register User";
 }
 
 <h2 class="text-center">New User</h2>
-<form asp-action="Register" method="post" class="w-50 mx-auto border p-4 rounded shadow">
+<form asp-action="RegisterUser" method="post" class="w-50 mx-auto border p-4 rounded shadow">
     <div class="mb-3">
         <label for="fullName" class="form-label">Full Name</label>
         <input type="text" name="fullName" id="fullName" class="form-control" required />
@@ -33,6 +33,4 @@
     <button type="submit" class="btn btn-success w-100">Register</button>
 </form>
 
-<p class="text-center mt-3">
-    Already have an account? <a asp-action="Login">Login here</a>
-</p>
+
