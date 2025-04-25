@@ -46,13 +46,12 @@ namespace WebCMS.Controllers
         [HttpPost]
         public IActionResult Book(Appointment appointment)
         {
-           
+         
 
-            // Get the logged-in patient ID
             var patientId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (patientId == null)
             {
-                return Unauthorized(); // Ensure user is logged in
+                return Unauthorized(); 
             }
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -63,11 +62,11 @@ namespace WebCMS.Controllers
                 return BadRequest("Patient not found.");
             }
 
-            appointment.PatientId = patient.Id; // Assign the integer PatientId
+            appointment.PatientId = patient.Id;
 
-            appointment.Status = "Scheduled"; // Default status
+            appointment.Status = "Scheduled"; 
 
-            // Check if the doctor is available at the selected time
+           
             var isDoctorAvailable = !_context.Appointments
                 .Any(a => a.DoctorId == appointment.DoctorId &&
                           a.AppointmentDate == appointment.AppointmentDate);

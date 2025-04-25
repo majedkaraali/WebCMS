@@ -1,0 +1,34 @@
+﻿@model List<WebCMS.Models.LabTest>
+
+@{
+    ViewData["Title"] = "Lab Tests";
+}
+
+<h1 class="text-center">Lab Tests</h1>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+               
+                <th>Name</th>
+                <th>Unit</th>
+                <th>Reference Range</th>
+                <th>Test Category</th>
+            </tr>
+        </thead>
+        @foreach (var test in Model)
+        {
+            <tr>
+                <td>@test.TestName</td>
+                <td>@test.Unit</td>
+                <td>@test.ReferenceRange</td>
+                <td>@test.TestCategory</td>
+              
+            </tr>
+        }
+    </table>
+}
+
+<a asp-action="NewTest" class="btn btn-success">Create Test</a>
+<a asp-action="Index" class="btn btn-primary">Back to Lab</a>

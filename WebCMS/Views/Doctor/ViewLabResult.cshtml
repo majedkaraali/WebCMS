@@ -1,0 +1,134 @@
+﻿@model WebCMS.Models.LabTestResult
+
+@{
+    ViewData["Title"] = "Lab Result";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="h4 mb-0">Lab Test Result</h1>
+                <span class="badge bg-light text-primary fs-6">@Model.LapOrder.UpdatedDate.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h2 class="fw-bold text-primary mb-3">@Model.LabTest.TestName</h2>
+                    
+                    <div class="result-summary mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="me-3 fw-bold">Result:</span>
+                            <span class="fs-5">@Model.Result</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="me-3 fw-bold">Normal Range:</span>
+                            <span class="fs-5">@Model.LabTest.ReferenceRange</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center">
+                            <span class="me-3 fw-bold">Remark:</span>
+                            <span class="fs-5">@Model.Remark</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="status-indicator">
+                        @if(Model.Remark == "High")
+                        {
+                            <div class="alert alert-danger d-flex align-items-center">
+                                <i class="fas fa-exclamation-triangle me-2 fs-4"></i>
+                                <div>
+                                    <h5 class="alert-heading mb-1">High Result</h5>
+                                    <p class="mb-0">The result is above the normal range.</p>
+                                </div>
+                            </div>
+                        }
+                        else if(Model.Remark == "Low")
+                        {
+                            <div class="alert alert-warning d-flex align-items-center">
+                                <i class="fas fa-exclamation-circle me-2 fs-4"></i>
+                                <div>
+                                    <h5 class="alert-heading mb-1">Low Result</h5>
+                                    <p class="mb-0">The result is below the normal range.</p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-success d-flex align-items-center">
+                                <i class="fas fa-check-circle me-2 fs-4"></i>
+                                <div>
+                                    <h5 class="alert-heading mb-1">Normal Result</h5>
+                                    <p class="mb-0">The result is within the normal range.</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <div class="additional-info mt-4 pt-4 border-top">
+                <h5 class="fw-bold mb-3">Additional Information</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-card p-3 mb-3 bg-light rounded">
+                            <h6 class="fw-bold text-muted">Test Method</h6>
+                            <p>Standard Laboratory Procedure</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-card p-3 mb-3 bg-light rounded">
+                            <h6 class="fw-bold text-muted">Sample Type</h6>
+                            <p>Blood Sample</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-footer bg-light">
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-primary">
+                    <i class="fas fa-print me-2"></i>Print Result
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-download me-2"></i>Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        padding: 1.5rem;
+    }
+    
+    .card-body {
+        padding: 2rem;
+    }
+    
+    .status-indicator .alert {
+        border-radius: 10px;
+        padding: 1.25rem;
+    }
+    
+    .info-card {
+        transition: transform 0.2s;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+</style>

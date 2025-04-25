@@ -1,12 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
     ViewData["Title"] = "Lab";
     
 }
 
-@model List<WebCMS.Models.LabTestResult>;
 
 <h1 class="text-center">Working on this section</h1>
 
@@ -14,6 +11,9 @@
 {
     foreach(var result in Model)
     {
-        <p>Value:@result.LabTestId</p>
+        <p>Value:@result.LabTestName</p>
     }
 }
+<a asp-action="LabOrders" class="btn btn-success">Orders</a>
+<a asp-action="LabResults" class="btn btn-primary">LabResults</a>
+<a asp-action="LabTests" class="btn btn-dark">Tests</a>

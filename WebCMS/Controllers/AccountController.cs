@@ -37,10 +37,24 @@ namespace WebCMS.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Email not found.");
+                return View();
+            }
+
+            if (!await _userManager.CheckPasswordAsync(user, password))
+            {
+                ModelState.AddModelError(string.Empty, "Incorrect password.");
+                return View();
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
+
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByEmailAsync(email);
                 Console.WriteLine(user);
                 Console.WriteLine(user.Role);
                 Console.WriteLine("---------------------------------------------");
@@ -49,16 +63,27 @@ namespace WebCMS.Controllers
                     "Patient" => RedirectToAction("Index", "Patient"),
                     "Doctor" => RedirectToAction("Index", "Doctor"),
                     "Admin" => RedirectToAction("Index", "Admin"),
-                    "Lab man" => RedirectToAction("Index", "Lab man"),
+                    "LabWorker" => RedirectToAction("Index", "Lab"),
                     _ => RedirectToAction("Login"),
                 };
             }
+
+            if (result.IsLockedOut)
+            {
+                ModelState.AddModelError(string.Empty, "Account is locked out.");
+            }
+            else if (result.IsNotAllowed)
+            {
+                ModelState.AddModelError(string.Empty, "You are not allowed to log in.");
+            }
             else
             {
-                Console.WriteLine("Error");
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
+
             return View();
         }
+
 
         public IActionResult Register() => View();
 

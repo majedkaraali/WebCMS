@@ -16,7 +16,8 @@
         public DbSet<LabOrder> LabOrders { get; set; }
         public DbSet<LabTest> LabTests { get; set; }
         public DbSet<LabTestResult> LabTestResults { get; set; }
-        public DbSet<LabWorker> LabWorkers { get; set; }
+       // public DbSet<LabWorker> LabWorkers { get; set; }
+       public DbSet<LabUser> LabUsers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

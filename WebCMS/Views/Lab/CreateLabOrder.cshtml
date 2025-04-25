@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Create Lab Order";
+ 
+}
+
+@model WebCMS.Models.LabOrder
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h4 text-center mb-0">Create Lab Order</h1>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateLabOrder">
+                        <div class="form-group mb-4">
+                            <label asp-for="LabTestId" class="form-label fw-bold">Select Test</label>
+                            <select asp-for="LabTestId" class="form-select" asp-items="ViewBag.Tests">
+                                <option value="">-- Select a Test --</option>
+                            </select>
+                            <input type="hidden" asp-for="PatientId" value="@ViewBag.PatientId" />
+                            <input type="hidden" asp-for="DoctorId" value="@ViewBag.DoctorId" />
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-file-earmark-plus me-2"></i>Create Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

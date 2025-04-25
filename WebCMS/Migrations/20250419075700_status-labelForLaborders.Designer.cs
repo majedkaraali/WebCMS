@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebCMS.Models;
 
@@ -11,9 +12,11 @@ using WebCMS.Models;
 namespace WebCMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250419075700_status-labelForLaborders")]
+    partial class statuslabelForLaborders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,8 +329,9 @@ namespace WebCMS.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LabTestId")
-                        .HasColumnType("int");
+                    b.Property<string>("LabTestName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -342,8 +346,6 @@ namespace WebCMS.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
-
-                    b.HasIndex("LabTestId");
 
                     b.HasIndex("PatientId");
 
@@ -386,6 +388,7 @@ namespace WebCMS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Interpretation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LabOrderId")
@@ -670,12 +673,6 @@ namespace WebCMS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebCMS.Models.LabTest", "Test")
-                        .WithMany()
-                        .HasForeignKey("LabTestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WebCMS.Models.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
@@ -685,8 +682,6 @@ namespace WebCMS.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
-
-                    b.Navigation("Test");
                 });
 
             modelBuilder.Entity("WebCMS.Models.LabTestResult", b =>

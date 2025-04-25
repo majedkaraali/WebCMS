@@ -62,6 +62,8 @@ namespace WebCMS.Controllers
         {
             var user = new ApplicationUser { FullName = fullName, Email = email, UserName = email, Role = role };
             var result = await _userManager.CreateAsync(user, password);
+           
+            Console.WriteLine(result.Succeeded);
 
             if (result.Succeeded)
             {
@@ -88,27 +90,23 @@ namespace WebCMS.Controllers
                     _context.Patients.Add(patient);
                 }
                 else if (role == "LabWorker")
+                   
                 {
-                    var labWorker = new LabWorker
+                   
+                    var labUser = new LabUser
                     {
                         FullName = fullName,
                         Email = email,
+                        UserId = user.Id
 
                     };
-                    _context.LabWorkers.Add(labWorker);
+                    _context.LabUsers.Add(labUser);
+                 
                 }
 
                 else
                 {
                     Console.WriteLine("NO");
-
-                    //var admin = new Admin
-                    //{
-                    //    FullName = fullName,
-                    //    Email = email,
-                    //    UserId = user.Id
-                    //};
-                    //_context.Admins.Add(admin);
                 }
 
 

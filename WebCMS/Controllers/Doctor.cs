@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace WebCMS.Controllers
 {
-    [Authorize] // Ensures only logged-in users can access doctor features
+    [Authorize]
     public class DoctorController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +21,6 @@ namespace WebCMS.Controllers
 
         public IActionResult Index()
         {
-            // Get the logged-in doctor's ID
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == userId);
 
@@ -30,9 +29,8 @@ namespace WebCMS.Controllers
                 return NotFound("Doctor not found.");
             }
 
-            // Fetch upcoming appointments for the doctor
             var appointments = _context.Appointments
-             .Include(a => a.Patient) // Include Patient details
+             .Include(a => a.Patient) 
 
              .Where(a => a.DoctorId == doctor.Id)
              .OrderByDescending(a => a.CreatedDate)
@@ -41,7 +39,6 @@ namespace WebCMS.Controllers
           
 
             ViewBag.Doctor = doctor;
-          //  ViewBag.Patient = patient;
             return View(appointments);
         }
 
@@ -51,7 +48,7 @@ namespace WebCMS.Controllers
             var appointment = _context.Appointments.FirstOrDefault(a => a.Id == id);
             if (appointment == null)
             {
-                return NotFound(); // Handle case where appointment doesn't exist
+                return NotFound(); 
             }
             appointment.IsCancelled = true;
             appointment.UpdatedDate = DateTime.Now;
@@ -100,7 +97,7 @@ namespace WebCMS.Controllers
         public IActionResult View(int id)
         {
             var appintment = _context.Appointments
-                .Include(a => a.Patient) // Ensure you include related data  
+                .Include(a => a.Patient) 
                 .Include(a => a.Doctor)
                 .FirstOrDefault(a => a.Id == id);
 
@@ -191,8 +188,42 @@ namespace WebCMS.Controllers
             return View();
         }
 
-        public IActionResult LabResults() {
-            return View();
+
+        public IActionResult LabOrdersForOnePatient(int PatientId) {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == userId);
+
+            var patient = _context.Patients.FirstOrDefault(p => p.Id == PatientId);
+
+            var orders = _context.LabOrders.Where(i => i.PatientId == PatientId).Include(t=> t.Test).ToList();
+
+            ViewBag.PatientId = patient.Id;
+            ViewBag.DoctorId = doctor.Id;
+            ViewBag.Patient = patient;
+
+            return View(orders);
+        }
+
+        public IActionResult ViewLabResult(int id)
+        {
+
+            Console.WriteLine("--------------------D");
+            Console.WriteLine(id);
+
+      
+
+            var labResult = _context.LabTestResults
+                .Include(l => l.LabTest).Include(o=> o.LapOrder)
+                .FirstOrDefault(l => l.LabOrderId == id);
+
+            Console.WriteLine(labResult.Remark);
+
+            if (labResult == null)
+            {
+                return NotFound();
+            }
+
+            return View(labResult);
         }
 
     }

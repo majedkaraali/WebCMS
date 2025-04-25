@@ -1,0 +1,68 @@
+﻿@model WebCMS.Models.LabTestResult
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 text-center mb-0">Lab Test Results</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SendResult" method="post">
+
+                        <input asp-for="LabOrderId" />
+                        <input asp-for="LabTestId" />
+
+                  
+                        <div class="mb-4 p-3 bg-light rounded">
+                            <h5 class="text-muted">Test Information</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Order ID:</strong> @Model.LabOrderId</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Test:</strong> @ViewBag.Order.Test.TestName</p>
+                                </div>
+                            </div>
+                        </div>
+
+                
+                        <div class="form-group mb-4">
+                            <label asp-for="Result" class="form-label fw-bold">Test Result</label>
+                            <input asp-for="Result" class="form-control" placeholder="Enter test result value" />
+                            <span asp-validation-for="Result" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Remark" class="form-label fw-bold">Remark</label>
+                            <select asp-for="Remark" class="form-select">
+                                <option value="">-- Select Remark --</option>
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                            <span asp-validation-for="Remark" class="text-danger"></span>
+                        </div>
+
+                   
+                        <div class="form-group mb-4">
+                            <label asp-for="Interpretation" class="form-label fw-bold">Interpretation (Optional)</label>
+                            <textarea asp-for="Interpretation" class="form-control" rows="3"
+                                      placeholder="Additional interpretation notes..."></textarea>
+                        </div>
+
+          
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save me-2"></i>Save Results
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

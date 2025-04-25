@@ -4,6 +4,7 @@
 }
 
 <h2 class="text-center">Login</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <form asp-action="Login" method="post" class="w-50 mx-auto border p-4 rounded shadow">
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>

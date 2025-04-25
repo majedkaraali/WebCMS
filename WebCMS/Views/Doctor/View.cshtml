@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Appointment Details";
 }
-
 <div class="container mt-5">
     <div class="card shadow-lg border-0 rounded-4">
         <div class="card-header bg-primary text-white text-center">
@@ -24,7 +23,7 @@
                     </p>
                 </div>
                 <div class="col-md-6">
-                    <p><i class="bi bi-briefcase-medical"></i> <strong>Reason for Visit:</strong> @Model.ReasonForVisit</p>
+                    <p><i class="bi bi-activity"></i> <strong>Reason for Visit:</strong> @Model.ReasonForVisit</p>
                     <p><i class="bi bi-exclamation-circle"></i> <strong>Symptoms:</strong> @Model.Symptoms</p>
                     <p><i class="bi bi-clock"></i> <strong>Duration:</strong> @(Model.Duration.HasValue ? Model.Duration.Value + " minutes" : "Not specified")</p>
                     <p><i class="bi bi-sticky"></i> <strong>Notes:</strong> @Model.Notes</p>
@@ -48,20 +47,38 @@
                     </p>
                 </div>
             </div>
+
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <h4 class="text-center">Patient's Electronic Medical Record.</h4>
+                <a asp-action="EMR" class="btn btn-info py-2 px-5">Go To Details in EMR System <i class="bi bi-eye"></i> </a>
+                
+            </div>
+
         </div>
 
-        <div class="card-footer text-center">
-            <a asp-action="Index" class="btn btn-outline-secondary">
-                <i class="bi bi-arrow-left"></i> Back to Appointments
-            </a>
+        
 
-            <a asp-controller="Doctor" asp-action="Prescriptions" asp-route-id="@Model.Id" class="btn btn-info">Prescriptions</a>
-            <a asp-controller="Doctor" asp-action="Complete" asp-route-id="@Model.Id" class="btn btn-success">Mark Completed</a>
+        
 
-            <a asp-action="LabResults" class="btn btn-warning">Lab results</a>
-            <a asp-action="RadiologyReports" class="btn btn-dark">Radiology reports</a>
-            <a asp-action="EMR" class="btn btn-info">EMR</a>
-            <a asp-action="Notes" class="btn btn-secondary">Notes</a>
+
+        <div class="card-footer text-center d-flex flex-column justify-content-center gap-2">
+           
+            <div> <h4 class="w-100">Quick Actions</h4> </div>
+
+            <div>  
+                <a asp-action="Index" class="btn btn-outline-secondary flex-fill text-truncate">
+                    <i class="bi bi-arrow-left"></i> Back to Appointments
+                </a>
+
+                <a asp-controller="Doctor" asp-action="Prescriptions" asp-route-id="@Model.Id" class="btn btn-info flex-fill text-truncate">Prescriptions</a>
+                <a asp-controller="Doctor" asp-action="Complete" asp-route-id="@Model.Id" class="btn btn-success flex-fill text-truncate">Mark Completed</a>
+
+                <a asp-action="LabOrdersForOnePatient" asp-route-PatientId="@Model.PatientId" class="btn btn-warning flex-fill text-truncate">Lab Orders</a>
+
+                <a asp-action="RadiologyReports" class="btn btn-dark flex-fill text-truncate">Radiology reports</a>
+
+                <a asp-action="Notes" class="btn btn-secondary flex-fill text-truncate">Notes</a>
+            </div>
         </div>
 
     </div>
