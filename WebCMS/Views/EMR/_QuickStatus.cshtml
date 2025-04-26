@@ -1,0 +1,45 @@
+﻿@model Patient;
+
+    <div class="col-md-3 col-6">
+        <div class="card vital-stat">
+            <div class="value text-primary">--/88</div>
+            <div class="label">Blood Pressure</div>
+            <small class="text-danger">Not Tested</small>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card vital-stat">
+            <div class="value">?%</div>
+            <div class="label">A1C</div>
+            <small class="text-danger">Not Tested</small>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card vital-stat">
+            <div class="value">@Model.Weight kg</div>
+            <div class="label">Weight</div>
+            <small class="text-dark">+0 kg</small>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card vital-stat">
+            <div class="value">@ViewBag.BMI.ToString("0.0")</div>
+            <div class="label">BMI</div>
+
+            @if(ViewBag.BMI < 18.5){
+            <small class="text-warning">Underweight</small>
+            }
+            @if(ViewBag.BMI >= 18.5 && ViewBag.BMI < 24.9){
+                <small class="text-success">Normal</small>
+            }
+            @if(ViewBag.BMI >= 25 && ViewBag.BMI < 29.9){
+            <small class="text-warning">Overweight</small>
+        }
+        else if (ViewBag.BMI>30)
+        {
+            <small class="text-warning">Obesity</small>
+        }
+
+           
+        </div>
+    </div>

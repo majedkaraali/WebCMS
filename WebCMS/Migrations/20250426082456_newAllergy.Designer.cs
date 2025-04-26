@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebCMS.Models;
 
@@ -11,9 +12,11 @@ using WebCMS.Models;
 namespace WebCMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250426082456_newAllergy")]
+    partial class newAllergy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,11 +167,22 @@ namespace WebCMS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AllergyName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AllergyType")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateDiagnosed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PatientId1")
+                        .HasColumnType("int");
 
                     b.Property<string>("Reaction")
                         .HasColumnType("nvarchar(max)");
@@ -177,6 +191,8 @@ namespace WebCMS.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PatientId1");
 
                     b.ToTable("Allergies");
                 });
@@ -347,12 +363,6 @@ namespace WebCMS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DateDiagnosed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ICD10Code")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IllnessName")
@@ -558,12 +568,6 @@ namespace WebCMS.Migrations
                     b.Property<string>("Alcohol")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BloodType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -599,27 +603,15 @@ namespace WebCMS.Migrations
                     b.Property<string>("PolicyNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("SelectedAllergyIds")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Smoking")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SocialSecurityNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SporExercise")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserHeight")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("Weight")
-                        .HasColumnType("int");
 
                     b.Property<bool>("updated")
                         .HasColumnType("bit");
@@ -629,39 +621,6 @@ namespace WebCMS.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("WebCMS.Models.PatientAllergy", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AllergyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DateDiagnosed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PatientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatientId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AllergyId");
-
-                    b.HasIndex("PatientId1");
-
-                    b.ToTable("PatientAllergies");
                 });
 
             modelBuilder.Entity("WebCMS.Models.Prescription", b =>
@@ -760,6 +719,15 @@ namespace WebCMS.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebCMS.Models.Allergy", b =>
+                {
+                    b.HasOne("WebCMS.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId1");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("WebCMS.Models.Appointment", b =>
@@ -876,25 +844,6 @@ namespace WebCMS.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WebCMS.Models.PatientAllergy", b =>
-                {
-                    b.HasOne("WebCMS.Models.Allergy", "Allergy")
-                        .WithMany()
-                        .HasForeignKey("AllergyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebCMS.Models.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Allergy");
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("WebCMS.Models.Prescription", b =>

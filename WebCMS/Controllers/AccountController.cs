@@ -113,7 +113,9 @@ namespace WebCMS.Controllers
                     {
                         FullName = fullName,
                         Email = email,
-                        UserId = user.Id 
+                        UserId = user.Id,
+                        updated = false
+
                     };
                     _context.Patients.Add(patient);
                 }

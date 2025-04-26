@@ -50,7 +50,10 @@
 
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <h4 class="text-center">Patient's Electronic Medical Record.</h4>
-                <a asp-action="EMR" class="btn btn-info py-2 px-5">Go To Details in EMR System <i class="bi bi-eye"></i> </a>
+                <a asp-action="Index" asp-controller="EMR"  
+                asp-route-patientId="@Model.Patient.Id" asp-route-doctorId="@Model.Doctor.Id" 
+                class="btn btn-info py-2 px-5">Go To Details in EMR System <i class="bi bi-eye"></i>
+                </a>
                 
             </div>
 

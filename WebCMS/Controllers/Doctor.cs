@@ -207,10 +207,6 @@ namespace WebCMS.Controllers
         public IActionResult ViewLabResult(int id)
         {
 
-            Console.WriteLine("--------------------D");
-            Console.WriteLine(id);
-
-      
 
             var labResult = _context.LabTestResults
                 .Include(l => l.LabTest).Include(o=> o.LapOrder)

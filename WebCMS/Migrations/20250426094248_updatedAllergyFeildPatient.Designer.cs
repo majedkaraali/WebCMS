@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebCMS.Models;
 
@@ -11,9 +12,11 @@ using WebCMS.Models;
 namespace WebCMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250426094248_updatedAllergyFeildPatient")]
+    partial class updatedAllergyFeildPatient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -558,12 +561,6 @@ namespace WebCMS.Migrations
                     b.Property<string>("Alcohol")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BloodType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -605,21 +602,12 @@ namespace WebCMS.Migrations
                     b.Property<string>("Smoking")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SocialSecurityNumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SporExercise")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserHeight")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("Weight")
-                        .HasColumnType("int");
 
                     b.Property<bool>("updated")
                         .HasColumnType("bit");

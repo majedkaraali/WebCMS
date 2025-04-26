@@ -1,0 +1,618 @@
+﻿@{
+    Layout = "~/Views/Shared/_EmrLayout.cshtml";
+}
+
+
+<div class="container-fluid py-4">
+    <!-- Patient Header -->
+    <div id="patient_header">
+        
+    </div>
+
+    <!-- Quick Stats -->
+    <div id="quick_stats" class="row mb-4">
+        
+    </div>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4" id="patientTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+                <i class="bi bi-house-door"></i> Overview
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab">
+                <i class="bi bi-file-medical"></i> Medical Records
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="medications-tab" data-bs-toggle="tab" data-bs-target="#medications" type="button" role="tab">
+                <i class="bi bi-capsule-pill"></i> Medications
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="labs-tab" data-bs-toggle="tab" data-bs-target="#labs" type="button" role="tab">
+                <i class="bi bi-droplet"></i> Lab Results
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="billing-tab" data-bs-toggle="tab" data-bs-target="#billing" type="button" role="tab">
+                <i class="bi bi-cash-coin"></i> Billing
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="patientTabsContent">
+        <!-- Overview Tab -->
+        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+            <div class="row">
+                <!-- Upcoming Appointments -->
+                <div id="upcoming_appoitments" class="col-lg-6">
+                    
+                </div>
+
+                <!-- Current Medications -->
+                <div id="current_medications" class="col-lg-6">
+                    
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div id="recent_activity" class="card mt-4">
+                
+            </div>
+        </div>
+
+        <!-- Medical Records Tab -->
+        <div class="tab-pane fade" id="records" role="tabpanel">
+            <!-- Appointments and Scheduling -->
+            <div class="section-header">
+                
+            </div>
+
+            <!-- Medical History -->
+            <div class="section-header">
+                <h2><i class="bi bi-file-medical section-icon"></i>Medical History</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Past Illnesses
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Hypertension (diagnosed 2018)
+                                    <span class="badge bg-primary">Active</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Type 2 Diabetes (diagnosed 2020)
+                                    <span class="badge bg-primary">Active</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Childhood asthma (resolved age 12)
+                                    <span class="badge bg-secondary">Resolved</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Surgeries and Hospitalizations
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>Appendectomy</strong>
+                                    <div class="text-muted">2002 - General Hospital</div>
+                                    <small>No complications</small>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Hospitalization for pneumonia</strong>
+                                    <div class="text-muted">2015 (3 days) - City Medical Center</div>
+                                    <small>Treated with IV antibiotics</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Allergies
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning">
+                                <h5><i class="bi bi-exclamation-triangle-fill"></i> Drug Allergies</h5>
+                                <ul class="mb-0">
+                                    <li><strong>Penicillin</strong> - Rash, difficulty breathing</li>
+                                </ul>
+                            </div>
+                            <div class="alert alert-warning">
+                                <h5><i class="bi bi-exclamation-triangle-fill"></i> Food Allergies</h5>
+                                <ul class="mb-0">
+                                    <li><strong>Shellfish</strong> - Hives</li>
+                                </ul>
+                            </div>
+                            <div class="alert alert-success">
+                                <h5><i class="bi bi-check-circle-fill"></i> No Known Allergies</h5>
+                                <p class="mb-0">No known environmental or other allergies</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            Social History
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Smoking</label>
+                                        <div class="fw-bold">Never</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Alcohol</label>
+                                        <div class="fw-bold">Occasional (1-2 drinks/week)</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Exercise</label>
+                                        <div class="fw-bold">2-3 times per week</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Occupation</label>
+                                        <div class="fw-bold">Accountant</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clinical Notes -->
+            <div class="section-header">
+                <h2><i class="bi bi-clipboard2-pulse section-icon"></i>Clinical Notes</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Date</th>
+                            <th>Provider</th>
+                            <th>Visit Reason</th>
+                            <th>Diagnosis</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023-10-15</td>
+                            <td>Dr. Sarah Johnson</td>
+                            <td>Annual physical</td>
+                            <td>Uncontrolled hypertension, Obesity</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-outline-success">Print</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-07-20</td>
+                            <td>Dr. Michael Chen</td>
+                            <td>Diabetes follow-up</td>
+                            <td>Controlled hypertension, Diabetes Mellitus Type 2</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-outline-success">Print</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-04-05</td>
+                            <td>Dr. Sarah Johnson</td>
+                            <td>Hypertension check</td>
+                            <td>Essential (primary) hypertension</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-outline-success">Print</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Medications Tab -->
+        <div class="tab-pane fade" id="medications" role="tabpanel">
+            <div class="section-header">
+                <h2><i class="bi bi-capsule-pill section-icon"></i>Medications</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle-fill"></i> Always take medications as prescribed by your healthcare provider. Contact your provider if you experience any side effects.
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-list-check"></i> Active Medications
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="mb-1">Lisinopril</h5>
+                                            <small class="text-muted">ACE inhibitor</small>
+                                        </div>
+                                        <span class="badge bg-primary">10 mg</span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="mb-1"><strong>Directions:</strong> Take 1 tablet by mouth once daily</p>
+                                        <p class="mb-1"><strong>For:</strong> Hypertension</p>
+                                        <p class="mb-1"><strong>Prescribed:</strong> Dr. Sarah Johnson (03/15/2020)</p>
+                                        <p class="mb-1"><strong>Last Filled:</strong> 10/18/2023 (CVS #1234)</p>
+                                        <p class="mb-0"><strong>Refills:</strong> 2 remaining</p>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="mb-1">Metformin</h5>
+                                            <small class="text-muted">Biguanide</small>
+                                        </div>
+                                        <span class="badge bg-primary">1000 mg</span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="mb-1"><strong>Directions:</strong> Take 1 tablet by mouth twice daily with meals</p>
+                                        <p class="mb-1"><strong>For:</strong> Type 2 Diabetes</p>
+                                        <p class="mb-1"><strong>Prescribed:</strong> Dr. Michael Chen (05/22/2020)</p>
+                                        <p class="mb-1"><strong>Last Filled:</strong> 10/10/2023 (CVS #1234)</p>
+                                        <p class="mb-0"><strong>Refills:</strong> 1 remaining</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-clock-history"></i> Medication History
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>Atorvastatin</strong> (20 mg)
+                                            <div class="text-muted">For high cholesterol</div>
+                                        </div>
+                                        <span class="badge bg-secondary">Discontinued 2022</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>Hydrochlorothiazide</strong> (25 mg)
+                                            <div class="text-muted">For hypertension</div>
+                                        </div>
+                                        <span class="badge bg-secondary">Discontinued 2020</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>Amoxicillin</strong> (500 mg)
+                                            <div class="text-muted">For bacterial infection</div>
+                                        </div>
+                                        <span class="badge bg-secondary">Completed 2019</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-graph-up"></i> Medication Adherence
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Lisinopril Adherence</h5>
+                            <div class="progress mb-3" style="height: 30px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 92%">92%</div>
+                            </div>
+                            <p class="text-muted">Based on pharmacy refill data</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Metformin Adherence</h5>
+                            <div class="progress mb-3" style="height: 30px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 78%">78%</div>
+                            </div>
+                            <p class="text-muted">Based on pharmacy refill data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Results Tab -->
+        <div class="tab-pane fade" id="labs" role="tabpanel">
+            <div class="section-header">
+                <h2><i class="bi bi-droplet section-icon"></i>Laboratory Results</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle-fill"></i> Reference ranges may vary by laboratory. Please consult your healthcare provider for interpretation.
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-heart-pulse"></i> Most Recent Results (10/15/2023)
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Test</th>
+                                        <th>Result</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Hemoglobin A1C</td>
+                                        <td>6.8%</td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fasting Glucose</td>
+                                        <td>128 mg/dL</td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Cholesterol</td>
+                                        <td>188 mg/dL</td>
+                                        <td><span class="badge bg-success">Normal</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>LDL Cholesterol</td>
+                                        <td>102 mg/dL</td>
+                                        <td><span class="badge bg-warning">Borderline</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>HDL Cholesterol</td>
+                                        <td>45 mg/dL</td>
+                                        <td><span class="badge bg-success">Normal</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Triglycerides</td>
+                                        <td>150 mg/dL</td>
+                                        <td><span class="badge bg-warning">Borderline</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn btn-outline-primary">View Full Report</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-graph-up"></i> A1C Trend
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center py-4" style="background-color: #f8f9fa; border-radius: 5px;">
+                                <img src="https://via.placeholder.com/400x200?text=A1C+Trend+Chart" alt="A1C Trend Chart" class="img-fluid">
+                            </div>
+                            <table class="table table-sm mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>A1C</th>
+                                        <th>Change</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>10/15/2023</td>
+                                        <td>6.8%</td>
+                                        <td><span class="text-danger">+0.2%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>07/20/2023</td>
+                                        <td>6.6%</td>
+                                        <td><span class="text-success">-0.3%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>04/05/2023</td>
+                                        <td>6.9%</td>
+                                        <td><span class="text-danger">+0.1%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>01/10/2023</td>
+                                        <td>6.8%</td>
+                                        <td><span class="text-success">-0.5%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-collection"></i> All Lab Results
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Test</th>
+                                <th>Result</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10/15/2023</td>
+                                <td>Comprehensive Metabolic Panel</td>
+                                <td>See report</td>
+                                <td><span class="badge bg-warning">2 abnormal</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>07/20/2023</td>
+                                <td>Lipid Panel</td>
+                                <td>See report</td>
+                                <td><span class="badge bg-success">Normal</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>04/05/2023</td>
+                                <td>Hemoglobin A1C</td>
+                                <td>6.9%</td>
+                                <td><span class="badge bg-danger">High</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>01/10/2023</td>
+                                <td>Complete Blood Count</td>
+                                <td>See report</td>
+                                <td><span class="badge bg-success">Normal</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Billing Tab -->
+        <div class="tab-pane fade" id="billing" role="tabpanel">
+            <div class="section-header">
+                <h2><i class="bi bi-cash-coin section-icon"></i>Billing and Payments</h2>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="card-title">$0.00</h3>
+                            <p class="card-text">Current Balance</p>
+                            <button class="btn btn-primary">Make Payment</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="card-title">$300.00</h3>
+                            <p class="card-text">Total Charges (2023)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="card-title">$300.00</h3>
+                            <p class="card-text">Total Payments (2023)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-receipt"></i> Billing History
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Service</th>
+                                <th>Provider</th>
+                                <th>Charge</th>
+                                <th>Insurance Paid</th>
+                                <th>Patient Paid</th>
+                                <th>Balance</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10/15/2023</td>
+                                <td>Office Visit</td>
+                                <td>Dr. Johnson</td>
+                                <td>$150.00</td>
+                                <td>$120.00</td>
+                                <td>$30.00</td>
+                                <td>$0.00</td>
+                                <td><span class="badge bg-success">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td>10/15/2023</td>
+                                <td>Lab - A1C</td>
+                                <td>LabCorp</td>
+                                <td>$85.00</td>
+                                <td>$85.00</td>
+                                <td>$0.00</td>
+                                <td>$0.
+                            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                
+
+<div>
+    <input type="hidden" />
+</div>
+
+
+
+
+
+
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+                                          
+        $(document).ready(function () {
+                                             
+            const patientId = '@ViewBag.PatientId';
+            $("#patient_header").load("/EMR/PatientHeader?id=" + patientId);
+            $("#quick_stats").load("/EMR/QuickStatus?id=" + patientId);
+            $("#upcoming_appoitments").load("/EMR/UpcomingAppoitments?id=" + patientId);
+
+                                          
+        });
+    </script>
+}
+
+
+
+
+
+

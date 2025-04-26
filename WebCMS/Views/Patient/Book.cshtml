@@ -1,7 +1,5 @@
 ﻿@model WebCMS.Models.Appointment
 
-<h2>Book an Appointment</h2>
-
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
@@ -9,24 +7,44 @@
     </div>
 }
 
-<form asp-action="Book" method="post">
-    <div class="mb-3">
-        <label asp-for="DoctorId" class="form-label">Select Doctor</label>
-        <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.Doctors">
+<form asp-action="Book" method="post" class="p-4 bg-white rounded shadow-sm">
+    <h3 class="mb-4 fw-bold text-primary">Book Your Appointment</h3>
+
+    <div class="mb-4">
+        <label asp-for="DoctorId" class="form-label fw-medium">Select Doctor</label>
+        <select asp-for="DoctorId" class="form-select" asp-items="ViewBag.Doctors" required>
             <option value="">-- Select a Doctor --</option>
         </select>
-        <span asp-validation-for="DoctorId" class="text-danger"></span>
+        <span asp-validation-for="DoctorId" class="text-danger small mt-1"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="AppointmentDate" class="form-label">Appointment Date</label>
-        <input asp-for="AppointmentDate" type="datetime-local" class="form-control" />
-        <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label asp-for="ReasonForVisit" class="form-label fw-medium">Reason For Visit</label>
+            <input required asp-for="ReasonForVisit" type="text" class="form-control" placeholder="Brief description of your visit" />
+            <span asp-validation-for="ReasonForVisit" class="text-danger small mt-1"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Symptoms" class="form-label fw-medium">Symptoms</label>
+            <input  asp-for="Symptoms" type="text" class="form-control" placeholder="Describe your symptoms" />
+            <span asp-validation-for="Symptoms" class="text-danger small mt-1"></span>
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-success">Book Appointment</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <div class="mb-4">
+        <label asp-for="AppointmentDate" class="form-label fw-medium">Appointment Date & Time</label>
+        <input required asp-for="AppointmentDate" type="datetime-local" class="form-control" />
+        <span asp-validation-for="AppointmentDate" class="text-danger small mt-1"></span>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+        <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancel</a>
+        <button type="submit" class="btn btn-primary px-4">
+            <i class="bi bi-calendar-check me-1"></i> Book Appointment
+        </button>
+    </div>
 </form>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
