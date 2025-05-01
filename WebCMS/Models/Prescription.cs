@@ -9,6 +9,10 @@ public class Prescription
     public int DoctorId { get; set; } 
     public int PatientId { get; set; } 
 
+    public Doctor doctor { get; set; }
+    public Patient patient { get; set; }
+
+
     [Required]
     public int AppointmentId { get; set; }  
     public Appointment Appointment { get; set; }  
@@ -16,7 +20,7 @@ public class Prescription
 
     public string MedicationName { get; set; }
 
-    public string Dosage { get; set; } 
+    public string Dosage { get; set; } // E.g., "500 mg" , "1 tablet"
 
     public string Frequency { get; set; } // E.g., "Twice a day"  
 

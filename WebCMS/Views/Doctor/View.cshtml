@@ -81,6 +81,7 @@
                 <a asp-action="RadiologyReports" class="btn btn-dark flex-fill text-truncate">Radiology reports</a>
 
                 <a asp-action="Notes" class="btn btn-secondary flex-fill text-truncate">Notes</a>
+                <a asp-action="DiseaseView" asp-route-id="@Model.PatientId" asp-route-doctorId="@Model.DoctorId" class="btn btn-danger flex-fill text-truncate">Diseases</a>
             </div>
         </div>
 

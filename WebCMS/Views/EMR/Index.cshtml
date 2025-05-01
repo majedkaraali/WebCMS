@@ -68,36 +68,28 @@
         <!-- Medical Records Tab -->
         <div class="tab-pane fade" id="records" role="tabpanel">
             <!-- Appointments and Scheduling -->
-            <div class="section-header">
+            <div class="section-header AppoitmentRecords">
+
                 
             </div>
 
             <!-- Medical History -->
+           
             <div class="section-header">
                 <h2><i class="bi bi-file-medical section-icon"></i>Medical History</h2>
             </div>
-            <div class="row">
+
+            <div class="row" >
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-header">
                             Past Illnesses
                         </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Hypertension (diagnosed 2018)
-                                    <span class="badge bg-primary">Active</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Type 2 Diabetes (diagnosed 2020)
-                                    <span class="badge bg-primary">Active</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Childhood asthma (resolved age 12)
-                                    <span class="badge bg-secondary">Resolved</span>
-                                </li>
-                            </ul>
+
+                        <div class="card-body" id="PastIllnesses">
+                            
                         </div>
+
                     </div>
 
                     <div class="card mb-4">
@@ -605,6 +597,9 @@
             $("#patient_header").load("/EMR/PatientHeader?id=" + patientId);
             $("#quick_stats").load("/EMR/QuickStatus?id=" + patientId);
             $("#upcoming_appoitments").load("/EMR/UpcomingAppoitments?id=" + patientId);
+            $("#current_medications").load("/EMR/CurrentMedications?id=" + patientId);
+            $("#recent_activity").load("/EMR/RecentActivity?id=" + patientId);
+            $(".AppoitmentRecords").load("/EMR/AppoitmentRecords?id=" + patientId);
 
                                           
         });

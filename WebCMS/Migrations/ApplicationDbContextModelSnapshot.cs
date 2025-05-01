@@ -305,6 +305,35 @@ namespace WebCMS.Migrations
                     b.ToTable("Appointments");
                 });
 
+            modelBuilder.Entity("WebCMS.Models.Disease", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiseaseCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiseaseName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("DiseaseType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ICD10Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Diseases");
+                });
+
             modelBuilder.Entity("WebCMS.Models.Doctor", b =>
                 {
                     b.Property<int>("Id")
@@ -336,51 +365,6 @@ namespace WebCMS.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("WebCMS.Models.Illness", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DateDiagnosed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ICD10Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IllnessName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IllnessType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PatientId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PatientId1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Severity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Symptoms")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId1");
-
-                    b.ToTable("Illnesses");
                 });
 
             modelBuilder.Entity("WebCMS.Models.LabOrder", b =>
@@ -542,6 +526,47 @@ namespace WebCMS.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("MedicalRecords");
+                });
+
+            modelBuilder.Entity("WebCMS.Models.PatiensDiseases", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DiagnosedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DiagnosedbyDr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiseaseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DiseaseName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ICD10Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("PatiensDiseases");
                 });
 
             modelBuilder.Entity("WebCMS.Models.Patient", b =>
@@ -708,6 +733,10 @@ namespace WebCMS.Migrations
 
                     b.HasIndex("AppointmentId");
 
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
                     b.ToTable("Prescriptions");
                 });
 
@@ -790,15 +819,6 @@ namespace WebCMS.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebCMS.Models.Illness", b =>
-                {
-                    b.HasOne("WebCMS.Models.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId1");
-
-                    b.Navigation("Patient");
-                });
-
             modelBuilder.Entity("WebCMS.Models.LabOrder", b =>
                 {
                     b.HasOne("WebCMS.Models.Doctor", "Doctor")
@@ -867,6 +887,25 @@ namespace WebCMS.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("WebCMS.Models.PatiensDiseases", b =>
+                {
+                    b.HasOne("WebCMS.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebCMS.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("WebCMS.Models.Patient", b =>
                 {
                     b.HasOne("WebCMS.Models.ApplicationUser", "User")
@@ -905,7 +944,23 @@ namespace WebCMS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WebCMS.Models.Doctor", "doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebCMS.Models.Patient", "patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Appointment");
+
+                    b.Navigation("doctor");
+
+                    b.Navigation("patient");
                 });
 
             modelBuilder.Entity("WebCMS.Models.Doctor", b =>

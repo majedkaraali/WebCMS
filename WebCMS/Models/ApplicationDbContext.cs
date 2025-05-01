@@ -18,8 +18,9 @@
         public DbSet<LabTestResult> LabTestResults { get; set; }
         public DbSet<LabUser> LabUsers { get; set; }
         public DbSet<Allergy> Allergies { get; set; }
-        public DbSet<Illness> Illnesses { get; set; }
+        public DbSet<Disease> Diseases { get; set; }
         public DbSet<PatientAllergy> PatientAllergies { get; set; }
+        public DbSet<PatiensDiseases> PatiensDiseases { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

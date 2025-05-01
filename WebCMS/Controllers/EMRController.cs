@@ -17,20 +17,20 @@ namespace WebCMS.Controllers
         public IActionResult Index(int patientId, int doctorId)
         {
 
-           
 
-            ViewBag.PatientId=patientId;
-            ViewBag.DoctorId=doctorId;
+
+            ViewBag.PatientId = patientId;
+            ViewBag.DoctorId = doctorId;
             return View();
         }
 
         public IActionResult PatientHeader(int id)
         {
             Console.WriteLine(id);
-            var patient= _context.Patients.Include(a=>a.Appointments).Include(u=>u.User).FirstOrDefault(p=>p.Id==id);
+            var patient = _context.Patients.Include(a => a.Appointments).Include(u => u.User).FirstOrDefault(p => p.Id == id);
             var lastVisit = _context.Appointments
                 .Where(a => a.PatientId == id)
-                .Include(d=> d.Doctor)
+                .Include(d => d.Doctor)
                 .OrderByDescending(a => a.AppointmentDate)
                 .FirstOrDefault();
 
@@ -48,11 +48,11 @@ namespace WebCMS.Controllers
             var height = patient.UserHeight;
             var weight = patient.Weight;
 
-                 
+
             double heightInMetersDouble = Convert.ToDouble(height);
             double weightDouble = Convert.ToDouble(weight);
 
-            heightInMetersDouble= heightInMetersDouble / 100; 
+            heightInMetersDouble = heightInMetersDouble / 100;
 
             var bmi = weightDouble / (heightInMetersDouble * heightInMetersDouble);
 
@@ -74,8 +74,43 @@ namespace WebCMS.Controllers
 
         }
 
+        public IActionResult CurrentMedications(int id)
+        {
+            var medications = _context.Prescriptions
+                .Include(a => a.Appointment)
+                .Include(a => a.doctor)
+                .Include(a => a.patient)
+                .Where(a => a.PatientId == id)
+                .OrderByDescending(a => a.CreatedDate)
+                .ToList();
+
+
+            return PartialView("~/Views/EMR/_CurrentMedications.cshtml", medications);
+        }
+
+        public IActionResult RecentActivity(int id)
+        {
+
+            return PartialView("~/Views/EMR/_RecentActivity.cshtml");
 
 
 
+        }
+
+
+        public IActionResult AppoitmentRecords(int id)
+        {
+            var appoitments = _context.Appointments.Where(a => a.PatientId == id).Include(d=>d.Doctor).ToList();
+
+
+            return PartialView("~/Views/EMR/_AppoitmentRecords.cshtml",appoitments);
+
+        }
+
+        public IActionResult PastIllnesses(int id)
+        {
+
+            return PartialView("~/Vies/EMR/_PastIllnesses");
+        }
     }
 }

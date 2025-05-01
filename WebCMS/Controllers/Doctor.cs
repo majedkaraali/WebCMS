@@ -93,6 +93,90 @@ namespace WebCMS.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult DiseaseView(int id, int doctorId)
+        {
+            var patientDiseases = _context.PatiensDiseases
+                .Where(p => p.PatientId == id)
+                .ToList();
+
+         
+
+            ViewBag.PatientId = id;
+            ViewBag.doctorId = doctorId;
+
+            return View("~/Views/Doctor/DiseaseView.cshtml", patientDiseases);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult SearchDiseases(string term, int page = 1)
+        {
+            const int pageSize = 50;
+
+            // Make search term lowercase for consistent filtering
+            var loweredTerm = term?.ToLower();
+
+            // Filter, project early, order, and paginate
+            var query = _context.Diseases
+                .Where(d => string.IsNullOrEmpty(loweredTerm) || d.DiseaseName.ToLower().StartsWith(loweredTerm))
+                .OrderBy(d => d.DiseaseName)
+                .Select(d => new { id = d.Id, text = d.DiseaseName });
+
+            var totalCount = query.Count();
+
+            var diseases = query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return Json(new
+            {
+                results = diseases,
+                pagination = new { more = (page * pageSize) < totalCount }
+            });
+        }
+
+
+        [HttpPost]
+        public IActionResult AddDiagnoseToPatient(int patientId, int diseaseId,int doctorId)
+        {
+            
+            var doctorName= _context.Doctors
+                .Where(d => d.Id == doctorId)
+                .Select(d => d.FullName)
+                .FirstOrDefault();
+            var exists = _context.PatiensDiseases
+                .Any(p => p.PatientId == patientId && p.DiseaseId == diseaseId);
+
+            var diseaseName= _context.Diseases
+                .Where(d => d.Id == diseaseId)
+                .Select(d => d.DiseaseName)
+                .FirstOrDefault();
+            var icd10Code = _context.Diseases.Where(d => d.Id == diseaseId)
+                .Select(d => d.ICD10Code)
+                .FirstOrDefault();
+
+            if (!exists)
+            {
+                _context.PatiensDiseases.Add(new PatiensDiseases
+                {
+                    PatientId = patientId,
+                    DiseaseId = diseaseId,
+                    DiseaseName = diseaseName,
+                    ICD10Code = icd10Code,
+                    DoctorId=doctorId,
+                    DiagnosedbyDr = doctorName,
+                    DiagnosedDate = DateTime.Now
+                  
+                });
+
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("DiseaseView", new { id = patientId , doctorId = doctorId});
+        }
+
 
         public IActionResult View(int id)
         {
@@ -142,6 +226,7 @@ namespace WebCMS.Controllers
                 .Where(a => a.AppointmentId == id)
                 .ToList();
             var appoitment = _context.Appointments
+                 
                 .FirstOrDefault(a => a.Id == id);
 
             ViewBag.appoitment = appoitment;
@@ -152,7 +237,8 @@ namespace WebCMS.Controllers
 
         public IActionResult CreatePrescription(int id)
         {
-            var appoitment = _context.Appointments
+            var appoitment = _context.Appointments.Include(d=> d.Doctor).Include(p => p.Patient)
+              
                 .FirstOrDefault(a => a.Id == id);
 
             ViewBag.appoitment = appoitment;
@@ -163,7 +249,7 @@ namespace WebCMS.Controllers
 
 
         [HttpPost]
-        public IActionResult CreatePrescription([Bind("AppointmentId,MedicationName,Dosage,Frequency,Duration,Notes,CreatedDate")] Prescription prescription)
+        public IActionResult CreatePrescription([Bind("DoctorId,PatientId,AppointmentId,MedicationName,Dosage,Frequency,Duration,Notes,CreatedDate")] Prescription prescription)
         {
            
                
