@@ -107,10 +107,56 @@ namespace WebCMS.Controllers
 
         }
 
-        public IActionResult PastIllnesses(int id)
+        public IActionResult _PastIllnesses(int id)
         {
+            var diseases = _context.PatiensDiseases
+                .Include(a => a.Patient)
+                .Include(a => a.Doctor)
+                .Where(a => a.PatientId ==id)
+                .OrderByDescending(a => a.DiagnosedDate)
+                .ToList();
 
-            return PartialView("~/Vies/EMR/_PastIllnesses");
+            return PartialView(diseases);
         }
+
+
+        public IActionResult Allergies(int id)
+        {
+            var allergies = _context.PatientAllergies
+                .Include(a => a.Patient)
+                .Include(a => a.Allergy)
+                .Where(a => a.PatientId == id)
+                .OrderByDescending(a => a.DateDiagnosed)
+                .ToList();
+
+            
+            var FoodAllergiesCount= allergies.Count(allergies => allergies.Allergy.AllergyType == "Food");
+            var DrugAllergiesCount = allergies.Count(allergies => allergies.Allergy.AllergyType == "Drug");
+            var EnvironmentalAllergiesCount = allergies.Count(allergies => allergies.Allergy.AllergyType == "Environmental");
+            var InsectAllergiesCount = allergies.Count(allergies => allergies.Allergy.AllergyType == "Insect");
+            var MaterialAllergiesCount = allergies.Count(allergies => allergies.Allergy.AllergyType == "Material");
+
+            ViewBag.FoodAllergiesCount = FoodAllergiesCount;
+            ViewBag.DrugAllergiesCount = DrugAllergiesCount;
+            ViewBag.EnvironmentalAllergiesCount = EnvironmentalAllergiesCount;
+            ViewBag.InsectAllergiesCount = InsectAllergiesCount;
+            ViewBag.MaterialAllergiesCount = MaterialAllergiesCount;
+            ViewBag.TotalAllergiesCount = allergies.Count();
+
+            return PartialView("~/Views/EMR/_Allergies.cshtml",allergies);
+        }
+
+
+        public IActionResult SocialHistory(int id)
+        {
+            var patient= _context.Patients.FirstOrDefault(p=> p.Id == id);
+            return PartialView("~/Views/EMR/_SocialHistory.cshtml",patient);
+        }
+
+
+
+
     }
+
+
 }

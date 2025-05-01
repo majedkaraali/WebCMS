@@ -1,0 +1,45 @@
+﻿@model List<WebCMS.Models.PatientAllergy>
+
+
+
+    @if(Model!=null && Model.Any())
+    {
+        @foreach(var item in Model)
+        {
+            <div class="alert alert-warning">
+                <h5><i class="bi bi-exclamation-triangle-fill"></i> @item.Allergy.AllergyType</h5>
+                <ul class="mb-0">
+                    <li><strong>@item.Allergy.AllergyName</strong> - @item.Allergy.Reaction</li>
+                </ul>
+            </div>
+        }
+    }
+
+    <div class="alert alert-success">
+    @if (ViewBag.FoodAllergiesCount == 0)
+    {
+        <h5><i class="bi bi bi-check-circle-fill"></i> No Food Allergies</h5>
+    }
+    @if (ViewBag.DrugAllergiesCount == 0)
+    {
+        <h5><i class="bi bi bi-check-circle-fill"></i> No Drug Allergies</h5>
+    }
+    @if (ViewBag.EnvironmentalAllergiesCount == 0)
+    {
+        <h5><i class="bibi bi-check-circle-fill"></i> No Environmental Allergies</h5>
+    }
+
+    @if (ViewBag.InsectAllergiesCount == 0)
+    {
+        <h5><i class="bi bi bi-check-circle-fill"></i> No Insect Allergies</h5>
+    }
+
+    @if (ViewBag.MaterialAllergiesCount == 0)
+    {
+        <h5><i class="bi bi-check-circle-fill"></i> No Known Material Allergies</h5>
+       
+    }
+    </div>
+
+   
+

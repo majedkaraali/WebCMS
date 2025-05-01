@@ -118,23 +118,8 @@
                         <div class="card-header">
                             Allergies
                         </div>
-                        <div class="card-body">
-                            <div class="alert alert-warning">
-                                <h5><i class="bi bi-exclamation-triangle-fill"></i> Drug Allergies</h5>
-                                <ul class="mb-0">
-                                    <li><strong>Penicillin</strong> - Rash, difficulty breathing</li>
-                                </ul>
-                            </div>
-                            <div class="alert alert-warning">
-                                <h5><i class="bi bi-exclamation-triangle-fill"></i> Food Allergies</h5>
-                                <ul class="mb-0">
-                                    <li><strong>Shellfish</strong> - Hives</li>
-                                </ul>
-                            </div>
-                            <div class="alert alert-success">
-                                <h5><i class="bi bi-check-circle-fill"></i> No Known Allergies</h5>
-                                <p class="mb-0">No known environmental or other allergies</p>
-                            </div>
+                        <div class="card-body" id="allergies">
+                            
                         </div>
                     </div>
 
@@ -142,29 +127,8 @@
                         <div class="card-header">
                             Social History
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Smoking</label>
-                                        <div class="fw-bold">Never</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Alcohol</label>
-                                        <div class="fw-bold">Occasional (1-2 drinks/week)</div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Exercise</label>
-                                        <div class="fw-bold">2-3 times per week</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Occupation</label>
-                                        <div class="fw-bold">Accountant</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card-body" id="socialHistory">
+                           
                         </div>
                     </div>
                 </div>
@@ -600,6 +564,9 @@
             $("#current_medications").load("/EMR/CurrentMedications?id=" + patientId);
             $("#recent_activity").load("/EMR/RecentActivity?id=" + patientId);
             $(".AppoitmentRecords").load("/EMR/AppoitmentRecords?id=" + patientId);
+            $("#PastIllnesses").load("/EMR/PastIllnesses?id=" + patientId);
+            $("#allergies").load("/EMR/Allergies?id=" + patientId);
+            $("#socialHistory").load("/EMR/SocialHistory?id=" + patientId);
 
                                           
         });

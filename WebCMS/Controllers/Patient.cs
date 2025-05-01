@@ -170,7 +170,24 @@ namespace WebCMS.Controllers
             patient.CompanyName = updatedPatient.CompanyName;
             patient.SocialSecurityNumber = updatedPatient.SocialSecurityNumber;
             patient.updated = true;
-           
+
+            if (updatedPatient.SelectedAllergyIds != null) { 
+
+                foreach (var allergy in updatedPatient.SelectedAllergyIds)
+                {
+                   var newAllergy = new PatientAllergy
+                    {
+                        PatientId = patient.Id,
+                        AllergyId = allergy,
+                        Notes = "Allergy noted"
+                    };
+
+                    _context.PatientAllergies.Add(newAllergy);
+                }
+            }
+
+
+
             _context.SaveChanges(); 
 
             return RedirectToAction("Index");   
