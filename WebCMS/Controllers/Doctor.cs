@@ -6,6 +6,7 @@ using WebCMS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebCMS.Controllers
 {
@@ -241,6 +242,14 @@ namespace WebCMS.Controllers
               
                 .FirstOrDefault(a => a.Id == id);
 
+            
+
+            var diseases = _context.PatiensDiseases
+                .Where(p => p.PatientId == appoitment.PatientId);
+
+
+
+            ViewBag.PatientDiseases = new SelectList(diseases, "DiseaseName", "DiseaseName");
             ViewBag.appoitment = appoitment;
 
 
@@ -249,7 +258,7 @@ namespace WebCMS.Controllers
 
 
         [HttpPost]
-        public IActionResult CreatePrescription([Bind("DoctorId,PatientId,AppointmentId,MedicationName,Dosage,Frequency,Duration,Notes,CreatedDate")] Prescription prescription)
+        public IActionResult CreatePrescription([Bind("DoctorId,PatientId,AppointmentId,MedicationName,Quantity,ForDiseases,Status,Dosage,Frequency,Duration,Notes,CreatedDate")] Prescription prescription)
         {
            
                

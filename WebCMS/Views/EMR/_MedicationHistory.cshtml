@@ -1,0 +1,28 @@
+﻿@model List<WebCMS.Models.Prescription>
+
+
+
+<div class="list-group">
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var p in Model)
+        {
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <strong>Atorvastatin</strong> (20 mg)
+                        <div class="text-muted">For high cholesterol</div>
+                    </div>
+                    <span class="badge bg-secondary">Discontinued 2022</span>
+                </div>
+            </div>
+        }
+    }
+
+    else
+    {
+        <p>No Medication History found</p>
+    }
+
+</div>

@@ -107,7 +107,7 @@ namespace WebCMS.Controllers
 
         }
 
-        public IActionResult _PastIllnesses(int id)
+        public IActionResult PastIllnesses(int id)
         {
             var diseases = _context.PatiensDiseases
                 .Include(a => a.Patient)
@@ -116,12 +116,13 @@ namespace WebCMS.Controllers
                 .OrderByDescending(a => a.DiagnosedDate)
                 .ToList();
 
-            return PartialView(diseases);
+            return PartialView("~/Views/EMR/_PastIllnesses.cshtml", diseases);
         }
 
 
         public IActionResult Allergies(int id)
         {
+           
             var allergies = _context.PatientAllergies
                 .Include(a => a.Patient)
                 .Include(a => a.Allergy)
@@ -154,6 +155,23 @@ namespace WebCMS.Controllers
         }
 
 
+        public IActionResult ActiveMedications(int id)
+        {
+            var medications = _context.Prescriptions.Include(d=>d.doctor).Where(a => a.PatientId == id && a.Status=="Active")
+                .OrderByDescending(a => a.CreatedDate).ToList();
+
+            return PartialView("~/Views/EMR/_ActiveMedications.cshtml",medications);
+        }
+
+        public IActionResult MedicationHistory(int id)
+        {
+            var medications = _context.Prescriptions
+             .Include(d => d.doctor)
+             .Where(p => p.PatientId == id && (p.Status == "Discontinued" || p.Status == "Completed")).ToList();
+
+            return PartialView("~/Views/EMR/_MedicationHistory.cshtml", medications);
+
+        }
 
 
     }

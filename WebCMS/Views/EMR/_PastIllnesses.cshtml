@@ -3,21 +3,22 @@
 <ul class="list-group list-group-flush">
     @foreach (var item in Model)
     {
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            @item.DiseaseName (diagnosed @item.DiagnosedDate)
+        <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-4">
+            <!-- Increased padding -->
+            <div class="d-flex flex-column">
+                <!-- Better text organization -->
+                <span class="fw-semibold">@item.DiseaseName</span> <!-- Bold disease name -->
+                <small class="text-muted">Diagnosed: @(item.DiagnosedDate.HasValue ? item.DiagnosedDate.Value.ToString("dd MMM yyyy") : "N/A")</small> <!-- Improved date format -->
+            </div>
 
             @if (item.IsActive == true)
             {
-                <span class="badge bg-danger text-black badge-danger">Active</span>
+                <span class="badge rounded-pill bg-danger bg-opacity-10 text-danger">ACTIVE</span> <!-- More modern badge -->
             }
             else
             {
-                <span class="badge bg-info text-black badge-secondary">Inactive</span>
+                <span class="badge rounded-pill bg-secondary bg-opacity-10 text-secondary">INACTIVE</span> <!-- Consistent styling -->
             }
-
         </li>
-
     }
-
-
 </ul>

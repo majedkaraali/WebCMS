@@ -201,41 +201,9 @@
                         <div class="card-header">
                             <i class="bi bi-list-check"></i> Active Medications
                         </div>
-                        <div class="card-body">
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <h5 class="mb-1">Lisinopril</h5>
-                                            <small class="text-muted">ACE inhibitor</small>
-                                        </div>
-                                        <span class="badge bg-primary">10 mg</span>
-                                    </div>
-                                    <div class="mt-2">
-                                        <p class="mb-1"><strong>Directions:</strong> Take 1 tablet by mouth once daily</p>
-                                        <p class="mb-1"><strong>For:</strong> Hypertension</p>
-                                        <p class="mb-1"><strong>Prescribed:</strong> Dr. Sarah Johnson (03/15/2020)</p>
-                                        <p class="mb-1"><strong>Last Filled:</strong> 10/18/2023 (CVS #1234)</p>
-                                        <p class="mb-0"><strong>Refills:</strong> 2 remaining</p>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <h5 class="mb-1">Metformin</h5>
-                                            <small class="text-muted">Biguanide</small>
-                                        </div>
-                                        <span class="badge bg-primary">1000 mg</span>
-                                    </div>
-                                    <div class="mt-2">
-                                        <p class="mb-1"><strong>Directions:</strong> Take 1 tablet by mouth twice daily with meals</p>
-                                        <p class="mb-1"><strong>For:</strong> Type 2 Diabetes</p>
-                                        <p class="mb-1"><strong>Prescribed:</strong> Dr. Michael Chen (05/22/2020)</p>
-                                        <p class="mb-1"><strong>Last Filled:</strong> 10/10/2023 (CVS #1234)</p>
-                                        <p class="mb-0"><strong>Refills:</strong> 1 remaining</p>
-                                    </div>
-                                </div>
-                            </div>
+                        @* INJECTION *@
+                        <div class="card-body" id="ActiveMedications">
+                            
                         </div>
                     </div>
                 </div>
@@ -244,65 +212,14 @@
                         <div class="card-header">
                             <i class="bi bi-clock-history"></i> Medication History
                         </div>
-                        <div class="card-body">
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <strong>Atorvastatin</strong> (20 mg)
-                                            <div class="text-muted">For high cholesterol</div>
-                                        </div>
-                                        <span class="badge bg-secondary">Discontinued 2022</span>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <strong>Hydrochlorothiazide</strong> (25 mg)
-                                            <div class="text-muted">For hypertension</div>
-                                        </div>
-                                        <span class="badge bg-secondary">Discontinued 2020</span>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <strong>Amoxicillin</strong> (500 mg)
-                                            <div class="text-muted">For bacterial infection</div>
-                                        </div>
-                                        <span class="badge bg-secondary">Completed 2019</span>
-                                    </div>
-                                </div>
-                            </div>
+
+                        <div class="card-body" id="MedicationHistory">
+                            
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <i class="bi bi-graph-up"></i> Medication Adherence
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>Lisinopril Adherence</h5>
-                            <div class="progress mb-3" style="height: 30px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 92%">92%</div>
-                            </div>
-                            <p class="text-muted">Based on pharmacy refill data</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>Metformin Adherence</h5>
-                            <div class="progress mb-3" style="height: 30px;">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 78%">78%</div>
-                            </div>
-                            <p class="text-muted">Based on pharmacy refill data</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Lab Results Tab -->
         <div class="tab-pane fade" id="labs" role="tabpanel">
@@ -567,6 +484,8 @@
             $("#PastIllnesses").load("/EMR/PastIllnesses?id=" + patientId);
             $("#allergies").load("/EMR/Allergies?id=" + patientId);
             $("#socialHistory").load("/EMR/SocialHistory?id=" + patientId);
+            $("#ActiveMedications").load("/EMR/ActiveMedications?id=" + patientId);
+            $("#MedicationHistory").load("/EMR/MedicationHistory?id=" + patientId);
 
                                           
         });

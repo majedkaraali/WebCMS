@@ -12,11 +12,15 @@
         <thead>
             <tr>
                 <th>Medication Name</th>
+                <th>Quantity</th>
                 <th>Dosage</th>
                 <th>Frequency</th>
                 <th>Duration</th>
+                <th>For Diseases</th>
                 <th>Notes</th>
+                <th>Status</th>
                 <th>Created Date</th>
+
             </tr>
         </thead>
         <tbody>
@@ -24,10 +28,13 @@
             {
                 <tr>
                     <td>@item.MedicationName</td>
+                    <td>@item.Quantity</td>
                     <td>@item.Dosage</td>
                     <td>@item.Frequency</td>
                     <td>@item.Duration</td>
+                    <td>@item.ForDiseases</td>
                     <td>@item.Notes</td>
+                    <td>@item.Status</td>
                     <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
                 </tr>
             }
@@ -46,6 +53,9 @@ else
 
 
 
-        
 
 
+
+<a asp-action="Index" class="btn btn-outline-secondary flex-fill text-truncate">
+    <i class="bi bi-arrow-left"></i> Back to Appointments
+</a>
