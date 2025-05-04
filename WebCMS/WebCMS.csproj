@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Lab\LabResultss.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\EMR.css" />
   </ItemGroup>
 
@@ -41,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Lab\LabResultss.cshtml" />
     <None Include="wwwroot\lib\select2\dist\js\i18n\af.js" />
     <None Include="wwwroot\lib\select2\dist\js\i18n\ar.js" />
     <None Include="wwwroot\lib\select2\dist\js\i18n\az.js" />

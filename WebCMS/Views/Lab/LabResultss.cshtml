@@ -1,0 +1,31 @@
+﻿@model List<WebCMC.Models.LabResult>;
+
+@if (Model!=null && Model.Any())
+{
+
+
+    <table class="table table-bordered">
+        <tr>
+            
+            <th>Patient</th>
+            <th>Test Name</th>
+            <th>Remark</th>
+            <th>Result</th>
+           
+        </tr>
+    @foreach(var result in Model)
+    {
+        <tr>
+            <td>@result.LabOrder.Patient.FullName</td>
+            <td>@result.LabTest.TestName</td>
+            <td>@result.Remark</td>
+            <td>@result.Result</td>
+        </tr>
+
+     
+    }
+
+    </table>
+
+
+}

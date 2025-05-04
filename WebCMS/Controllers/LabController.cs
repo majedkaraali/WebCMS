@@ -40,11 +40,11 @@ namespace WebCMS.Controllers
                 return NotFound("Lab worker not found.");
             }
 
-            var labResults = _context.LabTestResults.ToList();
+            var labResults = _context.LabTestResults.Include(t=>t.LabTest).Include(o=>o.LapOrder).ToList();
 
             ViewBag.LabWorker = labWorker;
 
-            return View(labResults);
+            return View("~/Views/Lab/LabResults.cshtml", labResults);
         }
 
         public IActionResult LabOrders()
