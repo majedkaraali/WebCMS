@@ -1,34 +1,70 @@
-﻿@model List<WebCMS.Models.LabTest>
-
-@{
+﻿@{
     ViewData["Title"] = "Lab Tests";
 }
 
-<h1 class="text-center">Lab Tests</h1>
-@if (Model != null && Model.Any())
-{
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-               
-                <th>Name</th>
-                <th>Unit</th>
-                <th>Reference Range</th>
-                <th>Test Category</th>
-            </tr>
-        </thead>
-        @foreach (var test in Model)
-        {
-            <tr>
-                <td>@test.TestName</td>
-                <td>@test.Unit</td>
-                <td>@test.ReferenceRange</td>
-                <td>@test.TestCategory</td>
-              
-            </tr>
-        }
-    </table>
-}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Lab Group Tests</h1>
 
-<a asp-action="NewTest" class="btn btn-success">Create Test</a>
-<a asp-action="Index" class="btn btn-primary">Back to Lab</a>
+    <div class="card shadow-sm mb-5">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="testsCategory">
+                   
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">New Test Group</h2>
+
+            <form asp-action="NewCategory" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="Name" class="form-label">Test Name</label>
+                    <input type="text" class="form-control" id="Name" name="Name" required>
+                    <div class="invalid-feedback">Please provide a test name.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="Description" name="Description">
+                </div>
+
+               
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+          
+            (function () {
+                'use strict'
+                const forms = document.querySelectorAll('.needs-validation')
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })();
+
+           
+            $("#testsCategory").load("/Lab/GetLabTestCategory");
+        });
+    </script>
+}

@@ -285,6 +285,7 @@ namespace WebCMS.Controllers
 
 
         public IActionResult LabOrdersForOnePatient(int PatientId) {
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == userId);
 
@@ -296,7 +297,7 @@ namespace WebCMS.Controllers
             ViewBag.DoctorId = doctor.Id;
             ViewBag.Patient = patient;
 
-            return View(orders);
+            return View();
         }
 
         public IActionResult ViewLabResult(int id)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebCMS.Models;
 
@@ -11,9 +12,11 @@ using WebCMS.Models;
 namespace WebCMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250504210629_NewTestModel")]
+    partial class NewTestModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -381,7 +384,7 @@ namespace WebCMS.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LabTestCategoryId")
+                    b.Property<int>("LabTestId")
                         .HasColumnType("int");
 
                     b.Property<int>("PatientId")
@@ -398,7 +401,7 @@ namespace WebCMS.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.HasIndex("LabTestCategoryId");
+                    b.HasIndex("LabTestId");
 
                     b.HasIndex("PatientId");
 
@@ -416,11 +419,11 @@ namespace WebCMS.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("MaxRange")
-                        .HasColumnType("float");
+                    b.Property<int?>("MaxRange")
+                        .HasColumnType("int");
 
-                    b.Property<double?>("MinRange")
-                        .HasColumnType("float");
+                    b.Property<int?>("MinRange")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalValue")
                         .HasColumnType("nvarchar(max)");
@@ -433,9 +436,6 @@ namespace WebCMS.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Unit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("sex")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -462,7 +462,7 @@ namespace WebCMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LabTestCategories");
+                    b.ToTable("LabTestCategory");
                 });
 
             modelBuilder.Entity("WebCMS.Models.LabTestResult", b =>
@@ -867,9 +867,9 @@ namespace WebCMS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebCMS.Models.LabTestCategory", "Test")
+                    b.HasOne("WebCMS.Models.LabTest", "Test")
                         .WithMany()
-                        .HasForeignKey("LabTestCategoryId")
+                        .HasForeignKey("LabTestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

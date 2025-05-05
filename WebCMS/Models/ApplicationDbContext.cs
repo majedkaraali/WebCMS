@@ -21,6 +21,7 @@
         public DbSet<Disease> Diseases { get; set; }
         public DbSet<PatientAllergy> PatientAllergies { get; set; }
         public DbSet<PatiensDiseases> PatiensDiseases { get; set; }
+        public DbSet<LabTestCategory> LabTestCategories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

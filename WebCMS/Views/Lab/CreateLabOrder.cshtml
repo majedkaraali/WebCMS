@@ -16,8 +16,8 @@
                 <div class="card-body">
                     <form asp-action="CreateLabOrder">
                         <div class="form-group mb-4">
-                            <label asp-for="LabTestId" class="form-label fw-bold">Select Test</label>
-                            <select asp-for="LabTestId" class="form-select" asp-items="ViewBag.Tests">
+                            <label asp-for="LabTestCategoryId" class="form-label fw-bold">Select Test</label>
+                            <select asp-for="LabTestCategoryId" class="form-select" asp-items="ViewBag.Tests">
                                 <option value="">-- Select a Test --</option>
                             </select>
                             <input type="hidden" asp-for="PatientId" value="@ViewBag.PatientId" />

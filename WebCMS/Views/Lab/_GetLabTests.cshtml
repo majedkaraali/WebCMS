@@ -1,0 +1,25 @@
+﻿@model List<WebCMS.Models.LabTest>
+
+<thead class="table-light">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Normal Value</th>
+        <th scope="col">Min</th>
+        <th scope="col">Max</th>
+        <th scope="col"> Gender</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var test in Model)
+    {
+        <tr>
+            <td>@test.TestName</td>
+            <td>@test.Unit</td>
+            <td>@test.NormalValue</td>
+            <td>@test.MinRange</td>
+            <td>@test.MaxRange</td>
+            <td>@test.sex</td>
+        </tr>
+    }
+</tbody>
