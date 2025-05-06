@@ -52,7 +52,7 @@
                     }
                     else if (order.Status == "Completed")
                     {
-                        <a asp-action="ViewLabResult" asp-route-id="@order.Id" class="btn btn-secondary">View Results</a>
+                        <a asp-controller="Lab" asp-action="ViewAllResults" asp-route-OrderId="@order.Id" class="btn btn-secondary">View Results</a>
                     }
                     else
                     {

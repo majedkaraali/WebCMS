@@ -236,20 +236,22 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <i class="bi bi-heart-pulse"></i> Most Recent Results (10/15/2023)
+                            <i class="bi bi-heart-pulse"></i> Most Recent Results
                         </div>
-                        <div class="card-body">
+
+                        <div class="card-body" id="recentResults">
                             
                            
                         </div>
+
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <i class="bi bi-graph-up"></i> A1C Trend
+                            <i class="bi bi-graph-up"></i>Lab Orders History
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" id="LabOrders">
                           
                            
                         </div>
@@ -261,7 +263,7 @@
                 <div class="card-header">
                     <i class="bi bi-collection"></i> All Lab Results
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="allLabOrders">
                  
                 </div>
             </div>
@@ -318,6 +320,9 @@
             $("#socialHistory").load("/EMR/SocialHistory?id=" + patientId);
             $("#ActiveMedications").load("/EMR/ActiveMedications?id=" + patientId);
             $("#MedicationHistory").load("/EMR/MedicationHistory?id=" + patientId);
+            $("#recentResults").load("EMR/RecentLabResults?id=" + patientId);
+            $("#LabOrders").load("EMR/RecentLabOrders?id=" + patientId);
+            $("#allLabOrders").load("EMR/AllLabResults?id=" + patientId);
 
                                           
         });

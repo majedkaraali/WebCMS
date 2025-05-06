@@ -16,6 +16,7 @@ namespace WebCMS.Controllers
 
 
         public IActionResult Index()
+        
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var labWorker = _context.LabUsers.FirstOrDefault(l => l.UserId == userId);
@@ -30,6 +31,7 @@ namespace WebCMS.Controllers
             return View();
         }
 
+
         public IActionResult LabResults()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -40,11 +42,36 @@ namespace WebCMS.Controllers
                 return NotFound("Lab worker not found.");
             }
 
-            var labResults = _context.LabTestResults.Include(t=>t.LabTest).Include(o=>o.LapOrder).ToList();
+            var labResults = _context.LabOrders.Where(o=>o.Status=="Completed").Include(p=>p.Patient).Include(t=>t.Test).ToList();
 
             ViewBag.LabWorker = labWorker;
 
             return View("~/Views/Lab/LabResults.cshtml", labResults);
+        }
+
+
+        public IActionResult ViewAllResults(int OrderId)
+        {
+
+            var order= _context.LabOrders
+                .Include(l => l.Test)
+                .Include(l => l.Patient)
+         
+                .FirstOrDefault(l => l.Id == OrderId);
+
+            var labResults = _context.LabTestResults
+                .Include(t=>t.LabTest)
+                .Include(l => l.LapOrder)
+                .Where(o=>o.LabOrderId == OrderId)
+                .ToList();
+
+            ViewBag.UpdatedDate= order.UpdatedDate;
+            ViewBag.PatientName = order.Patient.FullName;
+            ViewBag.PatientGender = order.Patient.Gender;
+            ViewBag.TestName = order.Test.Name;
+
+            return View("~/Views/Lab/ShowLabResults.cshtml", labResults);
+
         }
 
         public IActionResult LabOrders()
@@ -213,12 +240,36 @@ namespace WebCMS.Controllers
         {
             foreach (var result in model.Results)
             {
-                result.LabOrderId = model.OrderId; 
-             
+                result.LabOrderId = model.OrderId;
+
+                var labTest = _context.LabTests.FirstOrDefault(t => t.Id == result.LabTestId);
+              
+                double Dresult = double.Parse(result.Result);
+
+                Console.WriteLine(result.Result);
+
+                result.Result = result.Result;
+
+                if (Dresult < labTest.MinRange)
+                {
+                    result.Remark = "Low";
+                }
+                else if (Dresult > labTest.MaxRange)
+                {
+                    result.Remark = "High";
+                }
+                else
+                {
+                    result.Remark = "Normal";
+                }
+
+
                 _context.LabTestResults.Add(result);
             }
 
             var order = _context.LabOrders.FirstOrDefault(l => l.Id == model.OrderId);
+
+           
 
             order.Status = "Completed";
             order.UpdatedDate = DateTime.Now;

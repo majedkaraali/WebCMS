@@ -1,0 +1,119 @@
+﻿@model List<LabTestResult>
+
+@{
+    ViewData["Title"] = "Lab Test Results";
+}
+
+<div class="container-lg mt-4">
+    <div class="card shadow-sm border-0 overflow-hidden">
+        <div class="card-header bg-primary text-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="h5 mb-0 fw-semibold">Test Results</h2>
+                <div class="badge bg-white text-primary fs-6">@DateTime.Now.ToString("MMM dd, yyyy")</div>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="row mb-4 g-4">
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 ">
+                        <h6 class="text-muted mb-2">Patient</h6>
+                        <h4 class="text-dark fw-semibold mb-0">@ViewBag.PatientName</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 ">
+                        <h6 class="text-muted mb-2">Test</h6>
+                        <h4 class="text-dark fw-semibold mb-0">@ViewBag.TestName</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 ">
+                        <h6 class="text-muted mb-2">Gender</h6>
+                        <h4 class="text-dark fw-semibold mb-0">@ViewBag.PatientGender</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 ">
+                        <h6 class="text-muted mb-2">Date Updated</h6>
+                        <h4 class="text-dark fw-semibold mb-0">@ViewBag.UpdatedDate</h4>
+                    </div>
+                </div>
+
+               
+            </div>
+
+       
+            <div class="table-responsive rounded-3 border">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">Test Name</th>
+                            <th>Result</th>
+                            <th>Normal Value</th>
+                            <th>Unit</th>
+                            <th>Min Range</th>
+                            <th>Max Range</th>
+                            <th class="pe-4">Remark</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var result in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-semibold">@result.LabTest.TestName</td>
+                                <td>
+                                    <span class="badge @(IsResultNormal(result) ? "bg-success" : "bg-danger") bg-opacity-10 text-dark">
+                                        @result.Result
+                                    </span>
+                                </td>
+                                <td>@result.LabTest.NormalValue</td>
+                                <td>@result.LabTest.Unit</td>
+                                <td>@result.LabTest.MinRange</td>
+                                <td>@result.LabTest.MaxRange</td>
+                                <td class="pe-4">
+                                    <span class="@GetRemarkColor(result.Remark)">@result.Remark</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-end gap-2 mt-4 pt-2">
+                <button class="btn btn-outline-primary">
+                    <i class="fas fa-print me-2"></i>Print
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-paper-plane me-2"></i>Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    bool IsResultNormal(LabTestResult result)
+    {
+        
+        return true; 
+    }
+
+    string GetRemarkColor(string remark)
+    {
+        if (string.IsNullOrEmpty(remark)) return "";
+        return remark.ToLower() switch
+        {
+            "abnormal" => "text-danger",
+            "critical" => "text-danger fw-bold",
+            "high" => "text-danger ",
+            "low" => "text-warning",
+            _ => "text-muted"
+        };
+    }
+}

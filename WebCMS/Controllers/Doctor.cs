@@ -115,10 +115,8 @@ namespace WebCMS.Controllers
         {
             const int pageSize = 50;
 
-            // Make search term lowercase for consistent filtering
             var loweredTerm = term?.ToLower();
 
-            // Filter, project early, order, and paginate
             var query = _context.Diseases
                 .Where(d => string.IsNullOrEmpty(loweredTerm) || d.DiseaseName.ToLower().StartsWith(loweredTerm))
                 .OrderBy(d => d.DiseaseName)
@@ -297,7 +295,7 @@ namespace WebCMS.Controllers
             ViewBag.DoctorId = doctor.Id;
             ViewBag.Patient = patient;
 
-            return View();
+            return View(orders);
         }
 
         public IActionResult ViewLabResult(int id)
@@ -308,7 +306,7 @@ namespace WebCMS.Controllers
                 .Include(l => l.LabTest).Include(o=> o.LapOrder)
                 .FirstOrDefault(l => l.LabOrderId == id);
 
-            Console.WriteLine(labResult.Remark);
+ 
 
             if (labResult == null)
             {

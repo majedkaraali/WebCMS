@@ -173,8 +173,59 @@ namespace WebCMS.Controllers
 
         }
 
+        public IActionResult RecentLabResults(int id)
+        {
+            var labOrders = _context.LabOrders.Where(o=>o.PatientId == id && o.Status == "Completed")
+               .OrderByDescending(o => o.UpdatedDate)
+               .Include(o => o.Test)
+               .ToList();
+
+            if (labOrders != null && labOrders.Any())
+            {
+                var FirstRecentOrder = labOrders[0];
+                var orderId = FirstRecentOrder.Id;
+
+                var LabResults = _context.LabTestResults.Where(r => r.LabOrderId == orderId)
+                    .Include(t => t.LabTest).ToList();
+
+                var TestName = FirstRecentOrder.Test.Name;
+
+                ViewBag.TestName = TestName;
+                return PartialView("~/Views/EMR/_RecentLabResults.cshtml", LabResults);
+
+            }
+
+            return PartialView("~/Views/EMR/_RecentLabResults.cshtml", null);
+
+           
+
+        }
+
+        public IActionResult RecentLabOrders(int id)
+        {
+            var orders = _context.LabOrders
+                .Include(o => o.Test)
+                .Where(o => o.PatientId == id)
+                .OrderByDescending(o => o.UpdatedDate)
+                .ToList();
+
+            return PartialView("~/Views/EMR/_RecentLabOrders.cshtml", orders);
+        }
+
+        public IActionResult AllLabResults(int id)
+        {
+            var orders = _context.LabOrders
+               .Include(o => o.Test)
+               .Where(o => o.PatientId == id && ( o.Status=="Completed"))
+               .OrderByDescending(o => o.UpdatedDate)
+               .ToList();
+
+            return PartialView("~/Views/EMR/_AllLabResults.cshtml", orders);
+        }
 
     }
 
-
 }
+
+
+

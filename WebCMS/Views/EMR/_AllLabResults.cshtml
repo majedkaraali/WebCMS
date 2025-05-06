@@ -1,0 +1,38 @@
+﻿@model List<LabOrder>;
+
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Create Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.UpdatedDate</td>
+                    <td>@order.Test.Name</td>
+                    <td>See report</td>
+                    <td>@order.CreatedDate</td>
+                    <td><a asp-controller="Lab" asp-action="ViewAllResults" asp-route-OrderId="@order.Id" class="btn btn-secondary">View Report</a></td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <h4 class="mb-3">No Lab Results</h4>
+    <div class="alert alert-warning">
+        <strong>Note:</strong> There are no lab results at this time.
+    </div>
+}
