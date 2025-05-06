@@ -89,9 +89,10 @@
                 <button class="btn btn-outline-primary">
                     <i class="fas fa-print me-2"></i>Print
                 </button>
-                <button class="btn btn-primary">
-                    <i class="fas fa-paper-plane me-2"></i>Download PDF
-                </button>
+                <a asp-action="DownloadLabResultPdf" asp-route-orderId="@Model.First().LabOrderId" class="btn btn-primary">
+                    <i class="fas fa-file-pdf me-2"></i>Download PDF
+                </a>
+
             </div>
         </div>
     </div>

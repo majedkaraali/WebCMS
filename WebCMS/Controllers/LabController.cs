@@ -3,6 +3,7 @@ using WebCMS.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Fluent;
 namespace WebCMS.Controllers
 {
     public class LabController : Controller
@@ -279,36 +280,31 @@ namespace WebCMS.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpPost]
-        //public IActionResult SendResult(LabTestResult UpResult)
-        //{
-            
-        //    var result = new LabTestResult()
-        //    {
-        //        LabOrderId = UpResult.LabOrderId,
-        //        LabTestId = UpResult.LabTestId,
-        //        Result = UpResult.Result,
-        //        Remark = UpResult.Remark,
-        //        Interpretation = UpResult.Interpretation,
-             
-        //    };
-        //    var order = _context.LabOrders.FirstOrDefault(l => l.Id == UpResult.LabOrderId);
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    order.Status = "Completed";
-        //    order.UpdatedDate = DateTime.Now;
-            
+        public IActionResult DownloadLabResultPdf(int orderId)
+        {
+            var order = _context.LabOrders
+                .Include(l => l.Test)
+                .Include(l => l.Patient)
+                .FirstOrDefault(l => l.Id == orderId);
 
+            var labResults = _context.LabTestResults
+                .Include(t => t.LabTest)
+                .Include(l => l.LapOrder)
+                .Where(o => o.LabOrderId == orderId)
+                .ToList();
 
-        //    _context.LabTestResults.Add(result);
-        //    _context.SaveChanges();
-        //    return RedirectToAction("LabOrders");
-            
-          
+            var document = new LabResultPdfDocument(
+                order.Patient.FullName,
+                order.Test.Name,
+                order.Patient.Gender,
+                order.UpdatedDate,
+                labResults
+            );
 
-        //}
+            var pdfBytes = document.GeneratePdf();
+
+            return File(pdfBytes, "application/pdf", $"LabResult_{order.Patient.FullName}_{DateTime.Now:yyyyMMdd}.pdf");
+        }
 
 
     }
