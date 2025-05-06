@@ -50,7 +50,11 @@
 
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <h4 class="text-center">Patient's Electronic Medical Record.</h4>
-                <a asp-action="EMR" class="btn btn-info py-2 px-5">Go To Details in EMR System <i class="bi bi-eye"></i> </a>
+                <a asp-action="Index" asp-controller="EMR"  
+                asp-route-patientId="@Model.Patient.Id" asp-route-doctorId="@Model.Doctor.Id" 
+                asp-route-appoitmentId="@Model.Id"
+                class="btn btn-info py-2 px-5">Go To Details in EMR System <i class="bi bi-eye"></i>
+                </a>
                 
             </div>
 
@@ -78,6 +82,7 @@
                 <a asp-action="RadiologyReports" class="btn btn-dark flex-fill text-truncate">Radiology reports</a>
 
                 <a asp-action="Notes" class="btn btn-secondary flex-fill text-truncate">Notes</a>
+                <a asp-action="DiseaseView" asp-route-id="@Model.PatientId" asp-route-doctorId="@Model.DoctorId" class="btn btn-danger flex-fill text-truncate">Diseases</a>
             </div>
         </div>
 

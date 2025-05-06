@@ -1,0 +1,36 @@
+﻿@model List<WebCMS.Models.PatiensDiseases>
+
+
+@if (Model != null && Model.Any())
+{
+    <ul class="list-group list-group-flush">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-4">
+
+                <div class="d-flex flex-column">
+
+                    <span class="fw-semibold">@item.DiseaseName</span>
+                    <small class="text-muted">Diagnosed: @(item.DiagnosedDate.HasValue ? item.DiagnosedDate.Value.ToString("dd MMM yyyy") : "N/A")</small>
+                </div>
+
+                @if (item.IsActive == true)
+                {
+                    <span class="badge  bg-danger bg-opacity-4 text-white">ACTIVE</span>
+                }
+                else
+                {
+                    <span class="badge  bg-secondary bg-opacity-4 text-white">INACTIVE </span>
+                }
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <h5 class="card-title">No Past Illnesses Found</h5>
+
+}
+
+
+

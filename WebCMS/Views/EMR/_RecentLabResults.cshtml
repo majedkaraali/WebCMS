@@ -1,0 +1,44 @@
+﻿@model List<LabTestResult>;
+
+@if(Model!=null && Model.Any())
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model)
+            {
+                <tr>
+                    <td>@result.LabTest.TestName</td>
+                    <td>@result.Result</td>
+                    <td>
+                        @if (result.Remark == "Normal")
+                        {
+                            <span class="badge bg-success">Normal</span>
+                        }
+                        else if (result.Remark == "High")
+                        {
+                            <span class="badge bg-danger">High</span>
+                        }
+                        else if (result.Remark == "Low")
+                        {
+                            <span class="badge bg-warning">Low</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+else
+{
+    <h5 class="card-title">No Recent Lab Results Found</h5>
+}
+

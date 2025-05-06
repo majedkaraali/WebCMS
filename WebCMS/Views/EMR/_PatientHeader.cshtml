@@ -1,0 +1,58 @@
+﻿@model Patient;
+@{
+}
+<div class="patient-header p-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-2 text-center">
+            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 100px; height: 100px; margin: 0 auto;">
+                <i class="bi bi-person-circle" style="font-size: 3rem; color: #6c757d;"></i>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2 class="mb-1">@Model.FullName</h2>
+            @{
+                var birthDate = Model.DateOfBirth;
+                int? age = null;
+
+                if (birthDate.HasValue)
+                {
+                    var today = DateTime.Today;
+                    age = today.Year - birthDate.Value.Year;
+
+                    if (birthDate.Value.Date > today.AddYears(-age.Value))
+                    {
+                        age--;
+                    }
+                }
+            }
+            <p class="text-muted mb-2">
+                ID : @Model.SocialSecurityNumber |
+                DOB: @(Model.DateOfBirth?.ToString("dd/MM/yyyy") ?? "N/A")
+                @if (age.HasValue)
+                {
+                    <text> (@age years)</text>
+                }
+            </p>
+
+
+
+           
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-status alert-light">
+                <div class="d-flex justify-content-between">
+                    <strong>Last Visit:</strong>
+                    <span>@ViewBag.LastVisit</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>Primary Physician:</strong>
+                    <span>@ViewBag.VisitPrimaryPhysician</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <strong>Insurance:</strong>
+                    <span>@Model.InsuranceProvider</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,295 @@
+﻿@{
+    Layout = "~/Views/Shared/_EmrLayout.cshtml";
+}
+
+
+<div class="container-fluid py-4">
+    <!-- Patient Header -->
+    <div id="patient_header">
+        
+    </div>
+
+    <!-- Quick Stats -->
+    <div id="quick_stats" class="row mb-4">
+        
+    </div>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4" id="patientTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+                <i class="bi bi-house-door"></i> Overview
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab">
+                <i class="bi bi-file-medical"></i> Medical Records
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="medications-tab" data-bs-toggle="tab" data-bs-target="#medications" type="button" role="tab">
+                <i class="bi bi-capsule-pill"></i> Medications
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="labs-tab" data-bs-toggle="tab" data-bs-target="#labs" type="button" role="tab">
+                <i class="bi bi-droplet"></i> Lab Results
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="billing-tab" data-bs-toggle="tab" data-bs-target="#billing" type="button" role="tab">
+                <i class="bi bi-cash-coin"></i> Billing
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="patientTabsContent">
+        <!-- Overview Tab -->
+        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+            <div class="row">
+                <!-- Upcoming Appointments -->
+                <div id="upcoming_appoitments" class="col-lg-6">
+                    
+                </div>
+
+                <!-- Current Medications -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-capsule-pill"></i> Active Medications
+                        </div>
+
+                        <div class="card-body" id="current_medications">
+
+                        </div>
+
+                        <div class="card-footer">
+                            <a asp-route-id="@ViewBag.AppoitmentId" asp-controller="Doctor" asp-action="Prescriptions" class="btn btn-outline-info">Add new</a>
+                        </div>
+
+                       
+                    </div>
+                
+
+                </div>
+            </div>
+            <!-- Recent Activity -->
+            <div id="recent_activity" class="card mt-4">
+                
+            </div>
+        </div>
+
+        <!-- Medical Records Tab -->
+        <div class="tab-pane fade" id="records" role="tabpanel">
+            <!-- Appointments and Scheduling -->
+            <div class="section-header AppoitmentRecords">
+
+                
+            </div>
+
+            <!-- Medical History -->
+           
+            <div class="section-header">
+                <h2><i class="bi bi-file-medical section-icon"></i>Medical History</h2>
+            </div>
+
+            <div class="row" >
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Past Illnesses
+                        </div>
+
+                        <div class="card-body" id="PastIllnesses">
+                            
+                        </div>
+
+                        <div class="card-footer">
+                            <a asp-route-id="@ViewBag.PatientId" asp-route-doctorId="@ViewBag.DoctorId" asp-controller="Doctor" asp-action="DiseaseView" class="btn btn-outline-success">Add new</a>
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            Social History
+                        </div>
+                        <div class="card-body" id="socialHistory">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Allergies
+                        </div>
+                        <div class="card-body" id="allergies">
+                            
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+
+         
+            
+        </div>
+
+        <!-- Medications Tab -->
+        <div class="tab-pane fade" id="medications" role="tabpanel">
+            <div class="section-header">
+                <h2><i class="bi bi-capsule-pill section-icon"></i>Medications</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle-fill"></i> Always take medications as prescribed by your healthcare provider. Contact your provider if you experience any side effects.
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-list-check"></i> Active Medications
+                        </div>
+                        @* INJECTION *@
+                        <div class="card-body" id="ActiveMedications">
+                            
+                        </div>
+                        <div class="card-footer">
+                         <a asp-route-id="@ViewBag.AppoitmentId" asp-controller="Doctor" asp-action="Prescriptions" class="btn btn-outline-info">Add new</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-clock-history"></i> Medication History
+                        </div>
+
+                        <div class="card-body" id="MedicationHistory">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Lab Results Tab -->
+
+        <div class="tab-pane fade" id="labs" role="tabpanel">
+            <div class="section-header">
+                <h2><i class="bi bi-droplet section-icon"></i>Laboratory Results</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle-fill"></i> Reference ranges may vary by laboratory. Please consult your healthcare provider for interpretation.
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-heart-pulse"></i> Most Recent Results
+                        </div>
+
+                        <div class="card-body" id="recentResults">
+                            
+                           
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-graph-up"></i>Lab Orders History
+                        </div>
+                        <div class="card-body" id="LabOrders">
+                          
+                           
+                        </div>
+                        <div class="card-footer">
+                            <a asp-controller="Lab" asp-action="CreateLabOrder" asp-route-DoctorId="@ViewBag.DoctorId" asp-route-PatientId="@ViewBag.PatientId" class="btn btn-warning">Create Order</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-collection"></i> All Lab Results
+                </div>
+                <div class="card-body" id="allLabOrders">
+                 
+                </div>
+            </div>
+        </div>
+
+        <!-- Billing Tab -->
+        <div class="tab-pane fade" id="billing" role="tabpanel">
+            <div class="section-header">
+                <h2><i class="bi bi-cash-coin section-icon"></i>Billing and Payments</h2>
+            </div>
+
+            
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-receipt"></i> Billing History
+                </div>
+                <div class="card-body">
+                   
+                </div>
+            </div>
+        </div>
+
+    
+
+                
+
+<div>
+    <input type="hidden" />
+</div>
+
+
+
+
+
+
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+                                          
+        $(document).ready(function () {
+                                             
+            const patientId = '@ViewBag.PatientId';
+            $("#patient_header").load("/EMR/PatientHeader?id=" + patientId);
+            $("#quick_stats").load("/EMR/QuickStatus?id=" + patientId);
+            $("#upcoming_appoitments").load("/EMR/UpcomingAppoitments?id=" + patientId);
+            $("#current_medications").load("/EMR/CurrentMedications?id=" + patientId);
+            $("#recent_activity").load("/EMR/RecentActivity?id=" + patientId);
+            $(".AppoitmentRecords").load("/EMR/AppoitmentRecords?id=" + patientId);
+            $("#PastIllnesses").load("/EMR/PastIllnesses?id=" + patientId);
+            $("#allergies").load("/EMR/Allergies?id=" + patientId);
+            $("#socialHistory").load("/EMR/SocialHistory?id=" + patientId);
+            $("#ActiveMedications").load("/EMR/ActiveMedications?id=" + patientId);
+            $("#MedicationHistory").load("/EMR/MedicationHistory?id=" + patientId);
+            $("#recentResults").load("EMR/RecentLabResults?id=" + patientId);
+            $("#LabOrders").load("EMR/RecentLabOrders?id=" + patientId);
+            $("#allLabOrders").load("EMR/AllLabResults?id=" + patientId);
+
+                                          
+        });
+    </script>
+}
+
+
+
+
+
+

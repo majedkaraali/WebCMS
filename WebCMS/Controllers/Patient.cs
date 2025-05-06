@@ -24,6 +24,16 @@ namespace WebCMS.Controllers
             var userId=User.FindFirstValue(ClaimTypes.NameIdentifier);
             var patient = _context.Patients.FirstOrDefault(p => p.UserId == userId);
 
+            if (patient == null)
+            {
+                return NotFound("Patient not found.");
+            }
+
+
+            if (patient.updated == false)
+            {
+                return RedirectToAction("Profile");
+            }
 
             var appointments = _context.Appointments
                 .Include(a => a.Doctor)
@@ -98,6 +108,11 @@ namespace WebCMS.Controllers
                 return BadRequest("Patient not found.");
             }
 
+            ViewBag.Allergies = _context.Allergies.ToList();
+
+
+
+
             return View(patient);
 
     
@@ -124,7 +139,7 @@ namespace WebCMS.Controllers
       
 
         [HttpPost]
-        public IActionResult Update(Patient updatedPatient)
+        public IActionResult UpdateProfile(Patient updatedPatient)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var patient = _context.Patients.FirstOrDefault(p => p.UserId == userId);
@@ -134,7 +149,6 @@ namespace WebCMS.Controllers
                 return BadRequest("Patient not found.");
             }
 
-            // Update patient details  
             patient.FullName = updatedPatient.FullName;
             patient.Email = updatedPatient.Email;
             patient.Address = updatedPatient.Address;
@@ -146,8 +160,33 @@ namespace WebCMS.Controllers
             patient.InsuranceProvider = updatedPatient.InsuranceProvider;
             patient.PolicyNumber = updatedPatient.PolicyNumber;
             patient.Occupation = updatedPatient.Occupation;
-            patient.Allergies = updatedPatient.Allergies;
-            patient.SocialHistory = updatedPatient.SocialHistory;
+            patient.Smoking = updatedPatient.Smoking;
+            patient.Alcohol = updatedPatient.Alcohol;
+            patient.SporExercise = updatedPatient.SporExercise;
+            patient.SelectedAllergyIds = updatedPatient.SelectedAllergyIds;
+            patient.UserHeight = updatedPatient.UserHeight;
+            patient.Weight = updatedPatient.Weight;
+            patient.BloodType = updatedPatient.BloodType;
+            patient.CompanyName = updatedPatient.CompanyName;
+            patient.SocialSecurityNumber = updatedPatient.SocialSecurityNumber;
+            patient.updated = true;
+
+            if (updatedPatient.SelectedAllergyIds != null) { 
+
+                foreach (var allergy in updatedPatient.SelectedAllergyIds)
+                {
+                   var newAllergy = new PatientAllergy
+                    {
+                        PatientId = patient.Id,
+                        AllergyId = allergy,
+                        Notes = "Allergy noted"
+                    };
+
+                    _context.PatientAllergies.Add(newAllergy);
+                }
+            }
+
+
 
             _context.SaveChanges(); 
 

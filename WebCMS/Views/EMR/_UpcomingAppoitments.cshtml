@@ -1,0 +1,40 @@
+﻿@model List<Appointment>;
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-calendar-event"></i> Upcoming Appointments</span>
+        <button class="btn btn-sm btn-outline-light">Schedule New</button>
+    </div>
+
+    <div class="card-body">
+        <div class="list-group">
+            @if(Model != null && Model.Any())
+            {
+                foreach (var appoitment in Model)
+                {
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <strong>@appoitment.AppointmentDate</strong>
+                            <span class="badge bg-primary">Scheduled</span>
+                        </div>
+                        <div>@appoitment.ReasonForVisit</div>
+                        <small class="text-muted">With Dr.@appoitment.Doctor.FullName</small>
+                    </div>
+
+                }
+
+
+            }
+
+            else
+            {
+                <div>
+                    <p class="text-center">No upcoming appointments.</p>
+                </div>
+            }
+            
+
+
+        </div>
+    </div>
+</div>

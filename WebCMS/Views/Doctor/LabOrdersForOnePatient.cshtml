@@ -28,7 +28,7 @@
         {
             <tr>
                 
-               <td>@order.Test.TestName</td>
+               <td>@order.Test.Name</td>
                
                 <td>@order.CreatedDate.ToString("dd/MM/yyyy")</td>
                 <td>
@@ -52,7 +52,7 @@
                     }
                     else if (order.Status == "Completed")
                     {
-                        <a asp-action="ViewLabResult" asp-route-id="@order.Id" class="btn btn-secondary">View Results</a>
+                        <a asp-controller="Lab" asp-action="ViewAllResults" asp-route-OrderId="@order.Id" class="btn btn-secondary">View Results</a>
                     }
                     else
                     {
@@ -71,3 +71,7 @@ else
 
 <a asp-controller="Lab" asp-action="CreateLabOrder" asp-route-DoctorId="@ViewBag.DoctorId" asp-route-PatientId="@ViewBag.PatientId" class="btn btn-warning">Create Order</a>
 
+
+<a asp-action="Index" class="btn btn-outline-secondary flex-fill text-truncate">
+    <i class="bi bi-arrow-left"></i> Back to Appointments
+</a>

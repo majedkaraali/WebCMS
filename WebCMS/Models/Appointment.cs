@@ -13,26 +13,25 @@ namespace WebCMS.Models
 
         [Required]
         public int PatientId { get; set; }
-        public Patient Patient { get; set; } // Navigation property  
+        public Patient Patient { get; set; } 
 
         [Required]
         public int DoctorId { get; set; }
-        public Doctor Doctor { get; set; } // Navigation property  
-
+        public Doctor Doctor { get; set; } 
         public string Status { get; set; }
 
-        // New properties  
+ 
         public string? ReasonForVisit { get; set; }
         public string? Symptoms { get; set; }
-        public int? Duration { get; set; } // duration in minutes  
+        public int? Duration { get; set; } 
 
         public string? Notes { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.Now; // Automatically set to now  
+        public DateTime CreatedDate { get; set; } = DateTime.Now; 
 
-        public DateTime? UpdatedDate { get; set; } // Nullable for optional updates  
+        public DateTime? UpdatedDate { get; set; } 
 
-        public bool? IsCancelled { get; set; } = false; // Default to not cancelled  
+        public bool? IsCancelled { get; set; } = false; 
     }
 
 }

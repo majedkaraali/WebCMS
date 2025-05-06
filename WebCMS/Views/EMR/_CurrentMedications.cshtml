@@ -1,0 +1,36 @@
+﻿@model List<WebCMS.Models.Prescription>;
+
+
+
+
+<div class="list-group">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var m in Model)
+        {
+
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <strong>@m.MedicationName</strong>
+                    <span class="badge bg-info">@m.Dosage</span>
+                </div>
+                <div>@m.Frequency daily for @m.Duration Long</div>
+                <small class="text-muted">Prescribed by Dr. @m.doctor.FullName</small>
+            </div>
+                    
+        }
+
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <strong>Note:</strong> There are no active medications at this time.
+        </div>
+    }
+
+            
+           
+</div>
+
+        
+

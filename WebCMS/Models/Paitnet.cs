@@ -11,7 +11,8 @@
         public string? MedicalHistory { get; set; }
         public List<Appointment> Appointments { get; set; }
 
-        // New properties  
+        public bool updated { get; set; } = false;
+  
         public string? PhoneNumber { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string? Gender { get; set; }
@@ -19,9 +20,26 @@
         public string? EmergencyContactPhone { get; set; }
         public string? InsuranceProvider { get; set; }
         public string? PolicyNumber { get; set; }
+
+        public string? SocialSecurityNumber { get; set; }
+        public string? CompanyName { get; set; }
+
+        public int? UserHeight { get; set; } // in cm
+        public int? Weight { get; set; } // in kg
+        public string? BloodType { get; set; }
+
+
+
+        public List<int>? SelectedAllergyIds { get; set; } = new List<int>();
+
+
+        //Social History
+        public string? Smoking { get; set; }
+        public string? Alcohol { get; set; }
+        public string? SporExercise { get; set; }
         public string? Occupation { get; set; }
-        public string? Allergies { get; set; }
-        public string? SocialHistory { get; set; }
+
+
     }
 
 }

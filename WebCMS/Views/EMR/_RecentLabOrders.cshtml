@@ -1,0 +1,54 @@
+﻿@model List<LabOrder>;
+
+
+
+@if(Model!=null && Model.Any())
+{
+
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+
+        @foreach (var order in Model)
+        {
+
+            <tr>
+                <td>@order.Test.Name</td>
+                <td>@order.UpdatedDate.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @if (order.Status == "Pending")
+                    {
+                        <span class="badge bg-warning">Pending</span>
+                    }
+                    else if (order.Status == "Completed")
+                    {
+                        <span class="badge bg-success">Completed</span>
+                    }
+                    else if (order.Status == "Cancelled")
+                    {
+                        <span class="badge bg-danger">Cancelled</span>
+                    }
+                </td>
+            </tr>
+        }
+
+
+
+    </table>
+
+}
+
+else
+{
+     <h5 class="card-title">No Recent Lab Orders Found</h5>
+}
+
+
+
+

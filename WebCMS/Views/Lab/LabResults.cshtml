@@ -1,0 +1,39 @@
+﻿@model List<LabOrder>;
+
+<h2>Tests Results</h2>
+
+@if (Model != null && Model.Any())
+{
+
+
+    <table class="table table-bordered">
+        <tr>
+
+            <th>Patient</th>
+            <th>Test Name</th>
+            <th>Date</th>
+            <th>Actions</th>
+
+        </tr>
+        @foreach (var result in Model)
+        {
+            <tr>
+                <td>@result.Patient.FullName</td>
+                <td>@result.Test.Name</td>
+                <td>@result.UpdatedDate</td>
+                <td>
+
+                    <a class="btn btn-primary" asp-action="ViewAllResults" asp-route-OrderId="@result.Id">
+                            <i class="bi bi-eye"></i> Show Results
+                    </a>
+                </td>
+               
+            </tr>
+
+
+        }
+
+    </table>
+
+
+}

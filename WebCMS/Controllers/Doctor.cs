@@ -6,6 +6,7 @@ using WebCMS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebCMS.Controllers
 {
@@ -93,6 +94,104 @@ namespace WebCMS.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult DiseaseView(int id, int doctorId)
+        {
+            var patientDiseases = _context.PatiensDiseases
+                .Where(p => p.PatientId == id)
+                .ToList();
+
+         
+
+            ViewBag.PatientId = id;
+            ViewBag.doctorId = doctorId;
+
+            return View("~/Views/Doctor/DiseaseView.cshtml", patientDiseases);
+        }
+
+
+        public IActionResult ResolveDisease(int id)
+        {
+          
+            var diseases = _context.PatiensDiseases
+                .FirstOrDefault(d => d.Id == id);
+            diseases.IsActive = false;
+
+            _context.SaveChanges();
+
+           var patientId= diseases.PatientId;
+           var doctorId = diseases.DoctorId;
+
+            return RedirectToAction("DiseaseView", new { id = patientId, doctorId = doctorId });
+
+        }
+
+
+        [HttpGet]
+        public IActionResult SearchDiseases(string term, int page = 1)
+        {
+            const int pageSize = 50;
+
+            var loweredTerm = term?.ToLower();
+
+            var query = _context.Diseases
+                .Where(d => string.IsNullOrEmpty(loweredTerm) || d.DiseaseName.ToLower().StartsWith(loweredTerm))
+                .OrderBy(d => d.DiseaseName)
+                .Select(d => new { id = d.Id, text = d.DiseaseName });
+
+            var totalCount = query.Count();
+
+            var diseases = query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return Json(new
+            {
+                results = diseases,
+                pagination = new { more = (page * pageSize) < totalCount }
+            });
+        }
+
+
+        [HttpPost]
+        public IActionResult AddDiagnoseToPatient(int patientId, int diseaseId,int doctorId)
+        {
+            
+            var doctorName= _context.Doctors
+                .Where(d => d.Id == doctorId)
+                .Select(d => d.FullName)
+                .FirstOrDefault();
+            var exists = _context.PatiensDiseases
+                .Any(p => p.PatientId == patientId && p.DiseaseId == diseaseId);
+
+            var diseaseName= _context.Diseases
+                .Where(d => d.Id == diseaseId)
+                .Select(d => d.DiseaseName)
+                .FirstOrDefault();
+            var icd10Code = _context.Diseases.Where(d => d.Id == diseaseId)
+                .Select(d => d.ICD10Code)
+                .FirstOrDefault();
+
+            if (!exists)
+            {
+                _context.PatiensDiseases.Add(new PatiensDiseases
+                {
+                    PatientId = patientId,
+                    DiseaseId = diseaseId,
+                    DiseaseName = diseaseName,
+                    ICD10Code = icd10Code,
+                    DoctorId=doctorId,
+                    DiagnosedbyDr = doctorName,
+                    DiagnosedDate = DateTime.Now
+                  
+                });
+
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("DiseaseView", new { id = patientId , doctorId = doctorId});
+        }
+
 
         public IActionResult View(int id)
         {
@@ -142,6 +241,7 @@ namespace WebCMS.Controllers
                 .Where(a => a.AppointmentId == id)
                 .ToList();
             var appoitment = _context.Appointments
+                 
                 .FirstOrDefault(a => a.Id == id);
 
             ViewBag.appoitment = appoitment;
@@ -149,12 +249,33 @@ namespace WebCMS.Controllers
             return View(prescriptions);
         }
 
+        public IActionResult ResolvePrescription(int id)
+        {
+            var prescription = _context.Prescriptions.FirstOrDefault(p => p.Id == id);
+            prescription.Status = "Completed";
+            _context.SaveChanges();
+          
+            var appointmentId = prescription.AppointmentId;
+            Console.WriteLine(appointmentId);
+
+            return RedirectToAction("Prescriptions",new {id = appointmentId});
+
+        }
 
         public IActionResult CreatePrescription(int id)
         {
-            var appoitment = _context.Appointments
+            var appoitment = _context.Appointments.Include(d=> d.Doctor).Include(p => p.Patient)
+              
                 .FirstOrDefault(a => a.Id == id);
 
+            
+
+            var diseases = _context.PatiensDiseases
+                .Where(p => p.PatientId == appoitment.PatientId);
+
+
+
+            ViewBag.PatientDiseases = new SelectList(diseases, "DiseaseName", "DiseaseName");
             ViewBag.appoitment = appoitment;
 
 
@@ -163,7 +284,7 @@ namespace WebCMS.Controllers
 
 
         [HttpPost]
-        public IActionResult CreatePrescription([Bind("AppointmentId,MedicationName,Dosage,Frequency,Duration,Notes,CreatedDate")] Prescription prescription)
+        public IActionResult CreatePrescription([Bind("DoctorId,PatientId,AppointmentId,MedicationName,Quantity,ForDiseases,Status,Dosage,Frequency,Duration,Notes,CreatedDate")] Prescription prescription)
         {
            
                
@@ -190,6 +311,7 @@ namespace WebCMS.Controllers
 
 
         public IActionResult LabOrdersForOnePatient(int PatientId) {
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == userId);
 
@@ -207,16 +329,12 @@ namespace WebCMS.Controllers
         public IActionResult ViewLabResult(int id)
         {
 
-            Console.WriteLine("--------------------D");
-            Console.WriteLine(id);
-
-      
 
             var labResult = _context.LabTestResults
                 .Include(l => l.LabTest).Include(o=> o.LapOrder)
                 .FirstOrDefault(l => l.LabOrderId == id);
 
-            Console.WriteLine(labResult.Remark);
+ 
 
             if (labResult == null)
             {
@@ -225,6 +343,9 @@ namespace WebCMS.Controllers
 
             return View(labResult);
         }
+
+
+       
 
     }
 }

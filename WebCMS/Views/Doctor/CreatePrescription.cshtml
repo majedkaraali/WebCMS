@@ -1,46 +1,69 @@
 ﻿@model WebCMS.Models.Prescription
 
+<div class="container mt-4">
+    <h2 class="mb-3">Create Prescription</h2>
 
-<h2>Create Prescription</h2>
 
+    <form asp-action="CreatePrescription" class="border p-4 rounded">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
 
+        <input type="hidden" asp-for="AppointmentId" value="@ViewBag.appoitment.Id" />
+        <input type="hidden" asp-for="DoctorId" value="@ViewBag.appoitment.Doctor.Id" />
+        <input type="hidden" asp-for="PatientId" value="@ViewBag.appoitment.Patient.Id" />
+        <input type="hidden" asp-for="Status" value="Active" />
+        <input type="hidden" asp-for="CreatedDate" value="@DateTime.Now" />
 
-<form asp-action="CreatePrescription">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <label asp-for="MedicationName" class="form-label">Medication Name</label>
+                <input asp-for="MedicationName" class="form-control" />
+                <span asp-validation-for="MedicationName" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ForDiseases" class="form-label">For Condition</label>
+                <select asp-for="ForDiseases" asp-items="@ViewBag.PatientDiseases" class="form-select">
+                    <option value="">-- Select Condition --</option>
+                </select>
+                <span asp-validation-for="ForDiseases" class="text-danger small"></span>
+            </div>
+        </div>
 
-    <input type="hidden" asp-for="AppointmentId" value="@ViewBag.appoitment.Id" />
+        <div class="row mb-3">
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label asp-for="Quantity" class="form-label">Quantity</label>
+                <input placeholder="E.g., 3 tablets , 1 bottle" asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger small"></span>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label asp-for="Dosage" class="form-label">Dosage</label>
+                <input placeholder=" E.g., 500 mg , 2 pills" asp-for="Dosage" class="form-control" />
+                <span asp-validation-for="Dosage" class="text-danger small"></span>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label asp-for="Frequency" class="form-label">Frequency (daily)</label>
+                <input placeholder="E.g.,  Twice a day" asp-for="Frequency" class="form-control" />
+                <span asp-validation-for="Frequency" class="text-danger small"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Duration" class="form-label">Duration</label>
+                <input placeholder="E.g., 7 days , 1 month" asp-for="Duration" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger small"></span>
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="MedicationName"></label>
-        <input asp-for="MedicationName" class="form-control" />
-        <span asp-validation-for="MedicationName" class="text-danger"></span>
-    </div>
+        <div class="mb-4">
+            <label asp-for="Notes" class="form-label">Additional Notes</label>
+            <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Notes" class="text-danger small"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Dosage"></label>
-        <input asp-for="Dosage" class="form-control" />
-        <span asp-validation-for="Dosage" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Frequency"></label>
-        <input asp-for="Frequency" class="form-control" />
-        <span asp-validation-for="Frequency" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Duration"></label>
-        <input asp-for="Duration" class="form-control" />
-        <span asp-validation-for="Duration" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Notes"></label>
-        <textarea asp-for="Notes" class="form-control"></textarea>
-        <span asp-validation-for="Notes" class="text-danger"></span>
-    </div>
-
-    <input type="hidden" asp-for="CreatedDate" value="@DateTime.Now" />
-
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle"></i> Save Prescription
+            </button>
+        </div>
+    </form>
+</div>
