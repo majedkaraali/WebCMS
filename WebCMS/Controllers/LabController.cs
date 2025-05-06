@@ -179,7 +179,7 @@ namespace WebCMS.Controllers
             var NewOrder = new LabOrder()
             {
                 LabTestCategoryId = Order.LabTestCategoryId,
-                PatientId =Order.PatientId,
+                PatientId = Order.PatientId,
                 DoctorId = Order.DoctorId,
                 Status = "Pending",
                 CreatedDate = DateTime.Now,
@@ -189,7 +189,7 @@ namespace WebCMS.Controllers
             _context.LabOrders.Add(NewOrder);
             _context.SaveChanges();
 
-            return RedirectToAction("Index","Doctor");
+            return RedirectToAction("LabOrdersForOnePatient", "Doctor", new { PatientId = Order.PatientId});
         }
 
 

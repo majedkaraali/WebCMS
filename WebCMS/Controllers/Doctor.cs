@@ -109,6 +109,22 @@ namespace WebCMS.Controllers
         }
 
 
+        public IActionResult ResolveDisease(int id)
+        {
+          
+            var diseases = _context.PatiensDiseases
+                .FirstOrDefault(d => d.Id == id);
+            diseases.IsActive = false;
+
+            _context.SaveChanges();
+
+           var patientId= diseases.PatientId;
+           var doctorId = diseases.DoctorId;
+
+            return RedirectToAction("DiseaseView", new { id = patientId, doctorId = doctorId });
+
+        }
+
 
         [HttpGet]
         public IActionResult SearchDiseases(string term, int page = 1)
@@ -233,6 +249,18 @@ namespace WebCMS.Controllers
             return View(prescriptions);
         }
 
+        public IActionResult ResolvePrescription(int id)
+        {
+            var prescription = _context.Prescriptions.FirstOrDefault(p => p.Id == id);
+            prescription.Status = "Completed";
+            _context.SaveChanges();
+          
+            var appointmentId = prescription.AppointmentId;
+            Console.WriteLine(appointmentId);
+
+            return RedirectToAction("Prescriptions",new {id = appointmentId});
+
+        }
 
         public IActionResult CreatePrescription(int id)
         {
@@ -315,6 +343,9 @@ namespace WebCMS.Controllers
 
             return View(labResult);
         }
+
+
+       
 
     }
 }

@@ -17,6 +17,7 @@
                             <th>Diagnosed Date</th>
                             <th>By Doctor</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,12 @@
                                     {
                                         <span class="badge bg-info text-black badge-secondary">Inactive</span>
                                     }
+                                </td>
+                                <td>
+                                    <a asp-controller="Doctor" asp-action="ResolveDisease" asp-route-id="@item.Id" class="btn btn-success btn-sm">
+                                        <i class="fas fa-true"></i> Mark Resolved
+                                    </a>
+                                 </td>
                             </tr>
                         }
                         @if (!Model.Any())

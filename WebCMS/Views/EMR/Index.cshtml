@@ -54,11 +54,26 @@
                 </div>
 
                 <!-- Current Medications -->
-                <div id="current_medications" class="col-lg-6">
-                    
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-capsule-pill"></i> Active Medications
+                        </div>
+
+                        <div class="card-body" id="current_medications">
+
+                        </div>
+
+                        <div class="card-footer">
+                            <a asp-route-id="@ViewBag.AppoitmentId" asp-controller="Doctor" asp-action="Prescriptions" class="btn btn-outline-info">Add new</a>
+                        </div>
+
+                       
+                    </div>
+                
+
                 </div>
             </div>
-
             <!-- Recent Activity -->
             <div id="recent_activity" class="card mt-4">
                 
@@ -90,25 +105,17 @@
                             
                         </div>
 
+                        <div class="card-footer">
+                            <a asp-route-id="@ViewBag.PatientId" asp-route-doctorId="@ViewBag.DoctorId" asp-controller="Doctor" asp-action="DiseaseView" class="btn btn-outline-success">Add new</a>
+                        </div>
+
                     </div>
 
-                    <div class="card mb-4">
+                    <div class="card">
                         <div class="card-header">
-                            Surgeries and Hospitalizations
+                            Social History
                         </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <strong>Appendectomy</strong>
-                                    <div class="text-muted">2002 - General Hospital</div>
-                                    <small>No complications</small>
-                                </li>
-                                <li class="list-group-item">
-                                    <strong>Hospitalization for pneumonia</strong>
-                                    <div class="text-muted">2015 (3 days) - City Medical Center</div>
-                                    <small>Treated with IV antibiotics</small>
-                                </li>
-                            </ul>
+                        <div class="card-body" id="socialHistory">
                         </div>
                     </div>
                 </div>
@@ -123,66 +130,12 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            Social History
-                        </div>
-                        <div class="card-body" id="socialHistory">
-                           
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 
-            <!-- Clinical Notes -->
-            <div class="section-header">
-                <h2><i class="bi bi-clipboard2-pulse section-icon"></i>Clinical Notes</h2>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Date</th>
-                            <th>Provider</th>
-                            <th>Visit Reason</th>
-                            <th>Diagnosis</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2023-10-15</td>
-                            <td>Dr. Sarah Johnson</td>
-                            <td>Annual physical</td>
-                            <td>Uncontrolled hypertension, Obesity</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">View Details</button>
-                                <button class="btn btn-sm btn-outline-success">Print</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2023-07-20</td>
-                            <td>Dr. Michael Chen</td>
-                            <td>Diabetes follow-up</td>
-                            <td>Controlled hypertension, Diabetes Mellitus Type 2</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">View Details</button>
-                                <button class="btn btn-sm btn-outline-success">Print</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2023-04-05</td>
-                            <td>Dr. Sarah Johnson</td>
-                            <td>Hypertension check</td>
-                            <td>Essential (primary) hypertension</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">View Details</button>
-                                <button class="btn btn-sm btn-outline-success">Print</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+         
+            
         </div>
 
         <!-- Medications Tab -->
@@ -204,6 +157,9 @@
                         @* INJECTION *@
                         <div class="card-body" id="ActiveMedications">
                             
+                        </div>
+                        <div class="card-footer">
+                         <a asp-route-id="@ViewBag.AppoitmentId" asp-controller="Doctor" asp-action="Prescriptions" class="btn btn-outline-info">Add new</a>
                         </div>
                     </div>
                 </div>
@@ -254,6 +210,9 @@
                         <div class="card-body" id="LabOrders">
                           
                            
+                        </div>
+                        <div class="card-footer">
+                            <a asp-controller="Lab" asp-action="CreateLabOrder" asp-route-DoctorId="@ViewBag.DoctorId" asp-route-PatientId="@ViewBag.PatientId" class="btn btn-warning">Create Order</a>
                         </div>
                     </div>
                 </div>

@@ -14,11 +14,11 @@ namespace WebCMS.Controllers
         }
 
 
-        public IActionResult Index(int patientId, int doctorId)
+        public IActionResult Index(int patientId, int doctorId,int appoitmentId)
         {
 
 
-
+            ViewBag.AppoitmentId = appoitmentId;
             ViewBag.PatientId = patientId;
             ViewBag.DoctorId = doctorId;
             return View();
@@ -84,7 +84,7 @@ namespace WebCMS.Controllers
                 .OrderByDescending(a => a.CreatedDate)
                 .ToList();
 
-
+            ViewBag.PatientId = id;
             return PartialView("~/Views/EMR/_CurrentMedications.cshtml", medications);
         }
 
@@ -116,6 +116,8 @@ namespace WebCMS.Controllers
                 .OrderByDescending(a => a.DiagnosedDate)
                 .ToList();
 
+         
+            ViewBag.PatientId= id;
             return PartialView("~/Views/EMR/_PastIllnesses.cshtml", diseases);
         }
 

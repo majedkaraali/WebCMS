@@ -2,39 +2,35 @@
 
 
 
-<div class="card">
-    <div class="card-header">
-        <i class="bi bi-capsule-pill"></i> Active Medications
-    </div>
-    <div class="card-body">
-        <div class="list-group">
-            @if (Model != null && Model.Any())
-            {
-                foreach (var m in Model)
-                {
 
-                    <div class="list-group-item">
-                        <div class="d-flex justify-content-between">
-                            <strong>@m.MedicationName</strong>
-                            <span class="badge bg-info">@m.Dosage</span>
-                        </div>
-                        <div>@m.Frequency daily for @m.Duration Long</div>
-                        <small class="text-muted">Prescribed by Dr. @m.doctor.FullName</small>
-                    </div>
-                    
-                }
+<div class="list-group">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var m in Model)
+        {
 
-            }
-         else
-            {
-                <div class="alert alert-warning">
-                    <strong>Note:</strong> There are no active medications at this time.
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <strong>@m.MedicationName</strong>
+                    <span class="badge bg-info">@m.Dosage</span>
                 </div>
-            }
+                <div>@m.Frequency daily for @m.Duration Long</div>
+                <small class="text-muted">Prescribed by Dr. @m.doctor.FullName</small>
+            </div>
+                    
+        }
+
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <strong>Note:</strong> There are no active medications at this time.
+        </div>
+    }
 
             
-            
-        </div>
-    </div>
+           
 </div>
+
+        
 

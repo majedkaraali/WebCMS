@@ -20,6 +20,7 @@
                 <th>Notes</th>
                 <th>Status</th>
                 <th>Created Date</th>
+                <th>Actions</th>
 
             </tr>
         </thead>
@@ -36,6 +37,11 @@
                     <td>@item.Notes</td>
                     <td>@item.Status</td>
                     <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+
+                    <td>
+                        <a asp-action="ResolvePrescription" asp-route-id="@item.Id" class="btn btn-primary">Resolve</a>
+                    </td>
+
                 </tr>
             }
         </tbody>
