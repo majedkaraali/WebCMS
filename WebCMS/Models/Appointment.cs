@@ -24,13 +24,9 @@ namespace WebCMS.Models
         public string? ReasonForVisit { get; set; }
         public string? Symptoms { get; set; }
         public int? Duration { get; set; } 
-
         public string? Notes { get; set; }
-
         public DateTime CreatedDate { get; set; } = DateTime.Now; 
-
-        public DateTime? UpdatedDate { get; set; } 
-
+        public DateTime? UpdatedDate { get; set; }
         public bool? IsCancelled { get; set; } = false; 
     }
 
