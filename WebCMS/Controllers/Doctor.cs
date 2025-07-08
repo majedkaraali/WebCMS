@@ -65,6 +65,7 @@ namespace WebCMS.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == userId);
+ 
 
             if (doctor == null)
             {

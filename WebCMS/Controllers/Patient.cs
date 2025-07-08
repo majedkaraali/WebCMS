@@ -46,7 +46,7 @@ namespace WebCMS.Controllers
 
             return View(appointments);
         }
-
+     
         public IActionResult Book()
         {
             ViewBag.Doctors = new SelectList(_context.Doctors, "Id", "FullName");
@@ -88,7 +88,7 @@ namespace WebCMS.Controllers
                 return View(appointment);
             }
 
-            // Save the appointment
+       
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
 
