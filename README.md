@@ -79,17 +79,27 @@ git clone https://github.com/majedkaraali/WebCMS.git
 cd WebCMS
 ````
 
-2. **Open the project** in Visual Studio / Rider.
+2. **Download and restore the database**
 
-3. **Update the connection string** in `appsettings.json`.
+- Download the database backup file (`.bak`) from [this link](https://drive.google.com/file/d/1UOH2D8A_Bfdpl3VGWk9QNQpg20CBDhYt/view?usp=drive_link).
 
-4. **Run database migrations**:
+- **Restore the database using SQL Server Management Studio (SSMS):**  
+  1. Open SSMS and connect to your SQL Server instance.  
+  2. Right-click on **Databases** → **Restore Database**.  
+  3. Choose **Device** → select the downloaded `.bak` file.  
+  4. Follow the prompts to restore the database.  
+
+3. **Update the connection string** in `appsettings.json` to point to the restored database.  
+
+4. **Open the project** in your preferred IDE (Visual Studio / Rider).
+
+5. **Run database migrations**:
 
 ```bash
 dotnet ef database update
 ```
 
-5. **Start the application**:
+6. **Start the application**:
 
 ```bash
 dotnet run
