@@ -23,7 +23,7 @@ It follows a **modular and scalable architecture**, making it suitable for deplo
 Watch the demo on YouTube: [Clinic Management System Demo](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
 
 
-[![Watch the demo](https://onedrive.live.com/?qt=allmyphotos&photosData=%2Fshare%2F5C25C4AD3265F3F8%21sda69c3fd71d1444e950d6268777cf70e%3Fithint%3Dphoto%26e%3DmHBdom%26migratedtospo%3Dtrue&cid=5C25C4AD3265F3F8&id=5C25C4AD3265F3F8%21sda69c3fd71d1444e950d6268777cf70e&redeem=aHR0cHM6Ly8xZHJ2Lm1zL2kvYy81YzI1YzRhZDMyNjVmM2Y4L0VmM0RhZHJSY1U1RWxRMWlhSGQ4OXc0QmdTWldUaHdZemFxZ1Y2RlFsWFpqcFE%5FZT1tSEJkb20&v=photos)](https://youtu.be/eOQbz8T58IA)
+[![Watch the demo](https://github.com/majedkaraali/WebCMS/blob/d4ab6ffc6f9319832c9926c0793bcfd3a6b1ecf3/WebCMS/wwwroot/screenshots/thmb.png)](https://youtu.be/eOQbz8T58IA)
 
 
 
