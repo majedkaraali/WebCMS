@@ -7,6 +7,15 @@ It is designed for **patients, doctors, lab workers, and administrative staff**,
 The solution is built using modern technologies including **ASP.NET Core MVC, C#, SQL Server, and Entity Framework**.  
 It follows a **modular and scalable architecture**, making it suitable for deployment in real-world clinical environments.
 
+
+
+## 📸 Screenshots / Demo
+
+
+
+
+<!-- ![Screenshot](/WebCMS/wwwroot/screenshots/Roles.PNG) -->
+
 ## 📌 Project Overview  
 
 ### 🎯 Project Goal  
@@ -83,16 +92,10 @@ dotnet run
 - **Login as Lab Worker** → Process and upload lab test results  
 - **Login as Admin Staff** → Manage users, roles, and clinic operations  
 
----
-
-## 📸 Screenshots / Demo
 
 
 
 
-<!-- ![Screenshot](link-to-your-screenshot.png) -->
-
----
 
 ## 🤝 Contributing
 
@@ -124,7 +127,7 @@ git push origin feature/your-feature
 
 This project is licensed under the **MIT License** – feel free to use, modify, and distribute.
 
-```
+
 
 
 
