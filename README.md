@@ -14,7 +14,7 @@ It follows a **modular and scalable architecture**, making it suitable for deplo
 
 
 
-![Screenshot]([WebCMS/tree/master/WebCMS/wwwroot/screenshots/Roles.PNG])
+[Screenshot](/wwwroot/screenshots/Roles.PNG])
 
 ## 📌 Project Overview  
 
