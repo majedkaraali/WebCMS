@@ -52,7 +52,7 @@ The primary objective of the **Clinic Management System** is to provide an all-i
 
 Here’s your **Installation & Setup** section cleaned up in proper Markdown with code blocks:
 
-````markdown
+
 ## 🚀 Installation & Setup
 
 1. **Clone the repository**:
