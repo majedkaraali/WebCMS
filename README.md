@@ -21,7 +21,7 @@ It follows a **modular and scalable architecture**, making it suitable for deplo
 ## 📹 Demo Video
 
 Watch the demo on YouTube: [Clinic Management System Demo](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-
+<iframe width="693" height="391" src="https://www.youtube.com/embed/eOQbz8T58IA" title="Web Clinic Management System + EMR" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 ## 📌 Project Overview  
