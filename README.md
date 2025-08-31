@@ -14,7 +14,7 @@ It follows a **modular and scalable architecture**, making it suitable for deplo
 
 
 
-<!-- ![Screenshot]([/WebCMS/wwwroot/screenshots/Roles.PNG](https://github.com/majedkaraali/WebCMS/blob/master/WebCMS/wwwroot/screenshots/Roles.PNG)) -->
+![Screenshot]([/WebCMS/wwwroot/screenshots/Roles.PNG])
 
 ## 📌 Project Overview  
 
