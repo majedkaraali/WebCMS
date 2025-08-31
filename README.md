@@ -14,7 +14,7 @@ It follows a **modular and scalable architecture**, making it suitable for deplo
 
 
 
-[Screenshot](WebCMS/wwwroot/screenshots/emr.PNG)
+[Screenshot](https://github.com/majedkaraali/WebCMS/blob/98a949d67030eaf7655aaf8f5f898d9c47009f01/WebCMS/wwwroot/screenshots/emr.PNG)
 
 ## 📌 Project Overview  
 
