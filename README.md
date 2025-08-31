@@ -50,15 +50,13 @@ The primary objective of the **Clinic Management System** is to provide an all-i
 - **ORM & Authentication**: Entity Framework Core, Identity Framework  
 
 
-Here’s your **Installation & Setup** section cleaned up in proper Markdown with code blocks:
-
 
 ## 🚀 Installation & Setup
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/your-username/clinic-management-system.git
-cd clinic-management-system
+git clone https://github.com/majedkaraali/WebCMS.git
+cd WebCMS
 ````
 
 2. **Open the project** in Visual Studio / Rider.
@@ -77,9 +75,7 @@ dotnet ef database update
 dotnet run
 ```
 
-Here’s that section formatted nicely in Markdown:
 
-````markdown
 ## ▶️ Usage
 
 - **Login as Patient** → Book and manage appointments, view prescriptions and lab results  
@@ -91,9 +87,9 @@ Here’s that section formatted nicely in Markdown:
 
 ## 📸 Screenshots / Demo
 
-(Add screenshots or GIFs of your UI here for better presentation)  
 
-**Example:**  
+
+
 <!-- ![Screenshot](link-to-your-screenshot.png) -->
 
 ---
