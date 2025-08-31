@@ -16,6 +16,10 @@ It follows a **modular and scalable architecture**, making it suitable for deplo
 
 ![Screenshot](https://github.com/majedkaraali/WebCMS/blob/98a949d67030eaf7655aaf8f5f898d9c47009f01/WebCMS/wwwroot/screenshots/emr.PNG)
 
+![Screenshot](https://github.com/majedkaraali/WebCMS/blob/2c8e3cdd4ee2357b0b3b67763c1f582f5000b6f9/WebCMS/wwwroot/screenshots/appoitment%20detail.PNG)
+![Screenshot](https://github.com/majedkaraali/WebCMS/blob/2c8e3cdd4ee2357b0b3b67763c1f582f5000b6f9/WebCMS/wwwroot/screenshots/docIndex.PNG)
+
+
 ## 📌 Project Overview  
 
 ### 🎯 Project Goal  
